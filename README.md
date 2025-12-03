@@ -1,2 +1,2 @@
-# pomasa
-Patterns of Multi-Agent System Architecture
+# Patterns of Multi-Agent System Architecture
+
