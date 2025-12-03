@@ -244,10 +244,10 @@ agents/
 
 ## 相关模式
 
-- **[Prompt-Defined Agent](./01-prompt-defined-agent.md)**：每个Agent用Blueprint定义
-- **[Orchestrated Agent Pipeline](./06-orchestrated-agent-pipeline.md)**：Agent之间的执行顺序由Pipeline编排
-- **[Filesystem Data Bus](./04-filesystem-data-bus.md)**：每个Agent的产出存储在对应目录
-- **[Progressive Data Refinement](./08-progressive-data-refinement.md)**：数据在Agent之间逐步精炼
+- **[Prompt-Defined Agent](./COR-01-prompt-defined-agent.md)**：每个Agent用Blueprint定义
+- **[Orchestrated Agent Pipeline](./BHV-01-orchestrated-agent-pipeline.md)**：Agent之间的执行顺序由Pipeline编排
+- **[Filesystem Data Bus](./STR-02-filesystem-data-bus.md)**：每个Agent的产出存储在对应目录
+- **[Progressive Data Refinement](./BHV-04-progressive-data-refinement.md)**：数据在Agent之间逐步精炼
 
 ## 何时不使用此模式
 

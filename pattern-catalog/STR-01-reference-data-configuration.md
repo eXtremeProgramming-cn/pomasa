@@ -204,9 +204,9 @@ references/
 
 ## 相关模式
 
-- **[Prompt-Defined Agent](./01-prompt-defined-agent.md)**：Blueprint引用Reference Data
-- **[Filesystem Data Bus](./04-filesystem-data-bus.md)**：Reference Data通过文件系统提供给Agent
-- **[Embedded Quality Standards](./09-embedded-quality-standards.md)**：规范类Reference Data包含质量标准
+- **[Prompt-Defined Agent](./COR-01-prompt-defined-agent.md)**：Blueprint引用Reference Data
+- **[Filesystem Data Bus](./STR-02-filesystem-data-bus.md)**：Reference Data通过文件系统提供给Agent
+- **[Embedded Quality Standards](./QUA-01-embedded-quality-standards.md)**：规范类Reference Data包含质量标准
 
 ## 变体
 

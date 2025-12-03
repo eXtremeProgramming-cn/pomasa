@@ -8,39 +8,13 @@
 
 生成系统时，你必须参考 `pattern-catalog/` 目录下的模式文档。这些模式定义了系统的架构原则、设计规范和实现指南。
 
-### 必须采用的模式
+**请先阅读 [pattern-catalog/README.md](./pattern-catalog/README.md)**，了解完整的模式列表和分类。
 
-以下模式是构建声明式MAS系统的基础，必须采用：
+### 模式选择原则
 
-| 模式 | 文档 | 说明 |
-|------|------|------|
-| Prompt-Defined Agent | [01-prompt-defined-agent.md](./pattern-catalog/01-prompt-defined-agent.md) | 用自然语言Blueprint定义Agent行为 |
-| Intelligent Runtime | [02-intelligent-runtime.md](./pattern-catalog/02-intelligent-runtime.md) | 依赖智能运行时（Claude Code）执行 |
-| Faithful Agent Instantiation | [12-faithful-agent-instantiation.md](./pattern-catalog/12-faithful-agent-instantiation.md) | 调用Agent时让其读取完整Blueprint，每个任务独立调用 |
-| Verifiable Data Lineage | [13-verifiable-data-lineage.md](./pattern-catalog/13-verifiable-data-lineage.md) | 全链路可验证的数据血缘，防范AI幻觉 |
-
-### 推荐采用的模式
-
-以下模式强烈建议采用，除非有明确理由不用：
-
-| 模式 | 文档 | 说明 |
-|------|------|------|
-| Reference Data Configuration | [03-reference-data-configuration.md](./pattern-catalog/03-reference-data-configuration.md) | 领域知识外置为独立文件 |
-| Filesystem Data Bus | [04-filesystem-data-bus.md](./pattern-catalog/04-filesystem-data-bus.md) | 用文件系统传递Agent间数据 |
-| Workspace Isolation | [05-workspace-isolation.md](./pattern-catalog/05-workspace-isolation.md) | 限制Agent在指定目录内工作 |
-| Orchestrated Agent Pipeline | [06-orchestrated-agent-pipeline.md](./pattern-catalog/06-orchestrated-agent-pipeline.md) | 编排多Agent按阶段执行 |
-| Embedded Quality Standards | [09-embedded-quality-standards.md](./pattern-catalog/09-embedded-quality-standards.md) | 在Blueprint中嵌入质量标准 |
-| Business-Driven Agent Design | [11-business-driven-agent-design.md](./pattern-catalog/11-business-driven-agent-design.md) | Agent划分跟随业务流程，按执行顺序编号 |
-
-### 可选采用的模式
-
-以下模式根据具体场景选择是否采用：
-
-| 模式 | 文档 | 适用场景 |
-|------|------|----------|
-| Parallel Instance Execution | [07-parallel-instance-execution.md](./pattern-catalog/07-parallel-instance-execution.md) | 有多个独立数据分区需要处理 |
-| Progressive Data Refinement | [08-progressive-data-refinement.md](./pattern-catalog/08-progressive-data-refinement.md) | 数据需要多阶段精炼 |
-| Layered Quality Assurance | [10-layered-quality-assurance.md](./pattern-catalog/10-layered-quality-assurance.md) | 质量要求高，需要多层检查 |
+- **必要模式**：必须全部采用，这是声明式MAS系统的基础
+- **推荐模式**：强烈建议采用，除非有明确理由不用
+- **可选模式**：根据具体场景选择是否采用
 
 ## 生成流程
 
@@ -94,31 +68,6 @@
 - 采用的模式及理由
 - 如何启动和使用系统
 - 如何根据需要调整
-
-## 学术研究MAS的典型模式组合
-
-对于一般的学术研究类MAS，推荐采用以下模式组合：
-
-```
-必须采用：
-├── Prompt-Defined Agent         # 声明式Agent定义
-├── Intelligent Runtime          # 智能运行时支撑
-├── Faithful Agent Instantiation # 调用时读取完整Blueprint，每个任务独立调用
-└── Verifiable Data Lineage      # 全链路可验证的数据血缘，防范AI幻觉
-
-推荐采用：
-├── Reference Data Configuration  # 研究框架、方法论外置
-├── Filesystem Data Bus           # 数据传递和追溯
-├── Workspace Isolation           # 项目隔离
-├── Orchestrated Agent Pipeline   # 采集→分析→报告流水线
-├── Embedded Quality Standards    # 学术质量标准
-└── Business-Driven Agent Design  # Agent划分跟随业务流程
-
-按需采用：
-├── Parallel Instance Execution   # 多数据源/多维度并行
-├── Progressive Data Refinement   # 原始数据→分析→报告精炼
-└── Layered Quality Assurance     # 数据质检、分析校验、人工审核
-```
 
 ## 重要提醒
 

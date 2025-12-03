@@ -259,10 +259,10 @@ Orchestrator
 
 ## 相关模式
 
-- **[Prompt-Defined Agent](./01-prompt-defined-agent.md)**：流水线中的每个Agent都用Blueprint定义
-- **[Filesystem Data Bus](./04-filesystem-data-bus.md)**：阶段间通过文件系统传递数据
-- **[Parallel Instance Execution](./07-parallel-instance-execution.md)**：阶段内可并行执行多个Instance
-- **[Progressive Data Refinement](./08-progressive-data-refinement.md)**：数据在阶段间逐步精炼
+- **[Prompt-Defined Agent](./COR-01-prompt-defined-agent.md)**：流水线中的每个Agent都用Blueprint定义
+- **[Filesystem Data Bus](./STR-02-filesystem-data-bus.md)**：阶段间通过文件系统传递数据
+- **[Parallel Instance Execution](./BHV-03-parallel-instance-execution.md)**：阶段内可并行执行多个Instance
+- **[Progressive Data Refinement](./BHV-04-progressive-data-refinement.md)**：数据在阶段间逐步精炼
 
 ## 变体
 

@@ -288,10 +288,10 @@ AI系统（尤其是LLM）存在严重的"幻觉"问题：可能编造不存在�
 
 ## 相关模式
 
-- **[Faithful Agent Instantiation](./12-faithful-agent-instantiation.md)**：复核必须在独立subagent中执行
-- **[Business-Driven Agent Design](./11-business-driven-agent-design.md)**：复核Agent是独立的业务步骤
-- **[Embedded Quality Standards](./09-embedded-quality-standards.md)**：质量标准包括数据真实性要求
-- **[Layered Quality Assurance](./10-layered-quality-assurance.md)**：分层复核是质量保障的一部分
+- **[Faithful Agent Instantiation](./BHV-02-faithful-agent-instantiation.md)**：复核必须在独立subagent中执行
+- **[Business-Driven Agent Design](./STR-04-business-driven-agent-design.md)**：复核Agent是独立的业务步骤
+- **[Embedded Quality Standards](./QUA-01-embedded-quality-standards.md)**：质量标准包括数据真实性要求
+- **[Layered Quality Assurance](./QUA-02-layered-quality-assurance.md)**：分层复核是质量保障的一部分
 
 ## 检查清单
 

@@ -40,8 +40,11 @@ pomasa/
 ├── user_input_template.md   # 用户输入模板
 ├── pattern-catalog/         # 模式目录
 │   ├── README.md            # 模式一览和使用说明
-│   ├── 01-prompt-defined-agent.md
-│   ├── 02-intelligent-runtime.md
+│   ├── COR-01-prompt-defined-agent.md
+│   ├── COR-02-intelligent-runtime.md
+│   ├── STR-01-...
+│   ├── BHV-01-...
+│   ├── QUA-01-...
 │   └── ...
 └── references/              # 参考资料
     ├── declarative-multi-agent-architecture-part1-en.md
@@ -77,15 +80,6 @@ Generator会引导AI：
 直接阅读 `pattern-catalog/` 下的模式文档，了解声明式MAS的设计原则和最佳实践。
 
 ## 模式概览
-
-模式目录当前包含10个模式，分为四类：
-
-| 分类 | 模式数量 | 关注点 |
-|------|---------|--------|
-| 核心模式 | 2 | 系统基本特征 |
-| 结构模式 | 3 | 静态组织方式 |
-| 行为模式 | 3 | 动态执行方式 |
-| 质量模式 | 2 | 质量保障机制 |
 
 详见 [pattern-catalog/README.md](./pattern-catalog/README.md)
 

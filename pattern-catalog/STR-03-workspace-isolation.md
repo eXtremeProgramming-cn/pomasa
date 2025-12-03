@@ -167,9 +167,9 @@ This workspace boundary constraint must be emphasized in all agent blueprints.
 
 ## 相关模式
 
-- **[Prompt-Defined Agent](./01-prompt-defined-agent.md)**：工作空间约束是Blueprint的一部分
-- **[Filesystem Data Bus](./04-filesystem-data-bus.md)**：数据总线限定在工作空间内
-- **[Reference Data Configuration](./03-reference-data-configuration.md)**：参考数据应位于工作空间内
+- **[Prompt-Defined Agent](./COR-01-prompt-defined-agent.md)**：工作空间约束是Blueprint的一部分
+- **[Filesystem Data Bus](./STR-02-filesystem-data-bus.md)**：数据总线限定在工作空间内
+- **[Reference Data Configuration](./STR-01-reference-data-configuration.md)**：参考数据应位于工作空间内
 
 ## 变体
 

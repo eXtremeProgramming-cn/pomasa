@@ -223,9 +223,9 @@ data/{INDUSTRY_ID}/01.materials/03.deep_research/
 
 ## 相关模式
 
-- **[Orchestrated Agent Pipeline](./06-orchestrated-agent-pipeline.md)**：并行执行发生在Pipeline的各阶段内
-- **[Filesystem Data Bus](./04-filesystem-data-bus.md)**：通过目录分区支持并行写入
-- **[Prompt-Defined Agent](./01-prompt-defined-agent.md)**：同一Blueprint实例化为多个并行Instance
+- **[Orchestrated Agent Pipeline](./BHV-01-orchestrated-agent-pipeline.md)**：并行执行发生在Pipeline的各阶段内
+- **[Filesystem Data Bus](./STR-02-filesystem-data-bus.md)**：通过目录分区支持并行写入
+- **[Prompt-Defined Agent](./COR-01-prompt-defined-agent.md)**：同一Blueprint实例化为多个并行Instance
 
 ## 变体
 

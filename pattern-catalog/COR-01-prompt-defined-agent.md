@@ -202,10 +202,10 @@
 
 ## 相关模式
 
-- **[Intelligent Runtime](./02-intelligent-runtime.md)**：本模式依赖智能运行时来理解和执行Blueprint
-- **[Reference Data Configuration](./03-reference-data-configuration.md)**：Blueprint引用外置的参考数据
-- **[Embedded Quality Standards](./09-embedded-quality-standards.md)**：在Blueprint中嵌入质量标准
-- **[Workspace Isolation](./05-workspace-isolation.md)**：Blueprint中应包含工作空间隔离要求
+- **[Intelligent Runtime](./COR-02-intelligent-runtime.md)**：本模式依赖智能运行时来理解和执行Blueprint
+- **[Reference Data Configuration](./STR-01-reference-data-configuration.md)**：Blueprint引用外置的参考数据
+- **[Embedded Quality Standards](./QUA-01-embedded-quality-standards.md)**：在Blueprint中嵌入质量标准
+- **[Workspace Isolation](./STR-03-workspace-isolation.md)**：Blueprint中应包含工作空间隔离要求
 
 ## 变体
 

@@ -220,39 +220,161 @@ Reporter        → 03.reports/final_report.md
 
 ## 相关模式
 
-- **[Reference Data Configuration](./03-reference-data-configuration.md)**：Reference Data也存储在文件系统中，但位于`references/`而非`data/`
-- **[Workspace Isolation](./05-workspace-isolation.md)**：限制Agent只能访问特定目录
-- **[Progressive Data Refinement](./08-progressive-data-refinement.md)**：数据在目录间流转时逐步精炼
-- **[Parallel Instance Execution](./07-parallel-instance-execution.md)**：通过目录分区支持并行写入
+- **[Reference Data Configuration](./STR-01-reference-data-configuration.md)**：Reference Data也存储在文件系统中，但位于`references/`而非`data/`
+- **[Workspace Isolation](./STR-03-workspace-isolation.md)**：限制Agent只能访问特定目录
+- **[Progressive Data Refinement](./BHV-04-progressive-data-refinement.md)**：数据在目录间流转时逐步精炼
+- **[Parallel Instance Execution](./BHV-03-parallel-instance-execution.md)**：通过目录分区支持并行写入
 
-## 变体
+## 数据目录分区策略
+
+### 分区维度的选择
+
+**一级目录 = 运行实例的区分维度**
+
+根据任务特性选择合适的一级分区：
+
+| 任务类型 | 分区维度 | 示例 |
+|----------|----------|------|
+| 周期性任务 | 时间/日期 | `data/2025-12-03/` |
+| 多实体任务 | 实体ID | `data/US/`、`data/CN/` |
+| 一次性任务 | 无需一级分区 | 直接 `data/01.xxx/` |
+
+**二级目录 = Agent产出的阶段划分**
+
+无论采用何种一级分区，二级目录始终按Agent阶段编号：
+
+```
+data/{一级分区}/
+├── 01.initial_scan/
+├── 02.deep_research/
+├── 03.analysis/
+└── 04.reports/
+```
 
 ### 时间分区
-对于周期性任务，使用时间作为顶层分区：
+
+**适用场景**：周期性重复运行的任务
+
+- 每周新闻期刊
+- 每月市场报告
+- 每日数据采集
+
+**目录结构**：
 ```
 data/
-├── 2025-01/
-├── 2025-02/
-└── 2025-03/
+├── 2025-12-01/              # 周日期刊
+│   ├── 01.news_collection/
+│   ├── 02.analysis/
+│   └── 03.digest/
+├── 2025-12-08/              # 下周日期刊
+│   ├── 01.news_collection/
+│   └── ...
+└── latest -> 2025-12-08/    # 可选：符号链接指向最新
 ```
+
+**命名规范**：
+- 日期格式：`YYYY-MM-DD`（便于排序）
+- 月度任务：`YYYY-MM`
+- 周度任务：`YYYY-Wxx` 或 `YYYY-MM-DD`（周起始日）
 
 ### 实体分区
-对于多实体处理，使用实体作为顶层分区：
+
+**适用场景**：同一流程对多个独立实体分别运行
+
+- 区域国别研究（每个国家一次运行）
+- 多产业评估（每个产业一次运行）
+- 多组织分析（每个组织一次运行）
+
+**目录结构**：
 ```
 data/
-├── entity_a/
-├── entity_b/
-└── entity_c/
+├── US/                      # 美国研究
+│   ├── 01.data_collection/
+│   ├── 02.analysis/
+│   └── 03.report/
+├── CN/                      # 中国研究
+│   ├── 01.data_collection/
+│   └── ...
+└── JP/                      # 日本研究
+    └── ...
 ```
 
+**命名规范**：
+- 使用标准化ID（ISO国家代码、行业代码等）
+- 避免使用中文或特殊字符（跨平台兼容性）
+- 保持简短但可识别
+
 ### 混合分区
-结合时间和实体分区：
+
+**适用场景**：既有周期性，又有多实体
+
+- 每月各国经济指标跟踪
+- 每周多产业动态监测
+
+**目录结构**：
 ```
 data/
-└── 2025-03/
-    ├── entity_a/
-    ├── entity_b/
-    └── entity_c/
+└── 2025-03/                 # 一级：时间
+    ├── US/                  # 二级：实体
+    │   ├── 01.collection/
+    │   └── 02.report/
+    ├── CN/
+    └── JP/
+```
+
+**选择一级维度的原则**：
+- 哪个维度更常作为"一次运行"的单位？→ 作为一级
+- 时间周期固定、实体数量变化 → 时间在一级
+- 实体固定、时间周期灵活 → 实体在一级
+
+### 一次性任务
+
+**适用场景**：只运行一次，不需要区分实例
+
+**目录结构**：
+```
+data/
+├── 01.initial_scan/
+├── 02.deep_research/
+├── 03.analysis/
+└── 04.reports/
+```
+
+无需一级分区，阶段目录直接位于 `data/` 下。
+
+### Blueprint中的参数化
+
+**Orchestrator传递分区参数**：
+```markdown
+## 执行参数
+
+本次运行的参数：
+- INSTANCE_ID: {日期或实体ID，作为一级分区}
+- 例如：`2025-12-03` 或 `US`
+
+所有Agent的输出路径均以 `data/{INSTANCE_ID}/` 为根目录。
+```
+
+**Agent Blueprint使用参数**：
+```markdown
+## 输出位置
+
+`data/{INSTANCE_ID}/02.analysis/`
+
+其中 {INSTANCE_ID} 由Orchestrator传入。
+```
+
+### 历史数据的引用
+
+当需要引用历史运行结果时：
+
+```markdown
+## 输入
+
+**本期数据**：`data/{CURRENT_INSTANCE}/01.collection/`
+**上期数据**：`data/{PREVIOUS_INSTANCE}/01.collection/`（如需对比）
+
+Orchestrator在调用时需提供 PREVIOUS_INSTANCE 参数。
 ```
 
 ## 何时不使用此模式

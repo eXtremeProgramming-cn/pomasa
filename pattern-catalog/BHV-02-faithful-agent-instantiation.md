@@ -208,10 +208,10 @@
 
 ## 相关模式
 
-- **[Prompt-Defined Agent](./01-prompt-defined-agent.md)**：Blueprint是执行的唯一依据
-- **[Orchestrated Agent Pipeline](./06-orchestrated-agent-pipeline.md)**：Orchestrator协调时必须正确调用
-- **[Parallel Instance Execution](./07-parallel-instance-execution.md)**：并行执行时每个实例独立调用
-- **[Business-Driven Agent Design](./11-business-driven-agent-design.md)**：每个Agent有明确的Blueprint
+- **[Prompt-Defined Agent](./COR-01-prompt-defined-agent.md)**：Blueprint是执行的唯一依据
+- **[Orchestrated Agent Pipeline](./BHV-01-orchestrated-agent-pipeline.md)**：Orchestrator协调时必须正确调用
+- **[Parallel Instance Execution](./BHV-03-parallel-instance-execution.md)**：并行执行时每个实例独立调用
+- **[Business-Driven Agent Design](./STR-04-business-driven-agent-design.md)**：每个Agent有明确的Blueprint
 
 ## 检查清单
 

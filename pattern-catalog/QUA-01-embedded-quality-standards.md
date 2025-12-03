@@ -255,9 +255,9 @@
 
 ## 相关模式
 
-- **[Prompt-Defined Agent](./01-prompt-defined-agent.md)**：质量标准嵌入Blueprint
-- **[Reference Data Configuration](./03-reference-data-configuration.md)**：详细的质量规范可外置为Reference Data
-- **[Layered Quality Assurance](./10-layered-quality-assurance.md)**：多层质量保障的基础
+- **[Prompt-Defined Agent](./COR-01-prompt-defined-agent.md)**：质量标准嵌入Blueprint
+- **[Reference Data Configuration](./STR-01-reference-data-configuration.md)**：详细的质量规范可外置为Reference Data
+- **[Layered Quality Assurance](./QUA-02-layered-quality-assurance.md)**：多层质量保障的基础
 
 ## 变体
 

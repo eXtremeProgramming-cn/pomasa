@@ -217,9 +217,9 @@ JSON数据 → 分析Markdown
 
 ## 相关模式
 
-- **[Orchestrated Agent Pipeline](./06-orchestrated-agent-pipeline.md)**：Pipeline的各阶段实现数据精炼
-- **[Filesystem Data Bus](./04-filesystem-data-bus.md)**：精炼层次体现在目录结构中
-- **[Layered Quality Assurance](./10-layered-quality-assurance.md)**：每个精炼层次都有质量检查
+- **[Orchestrated Agent Pipeline](./BHV-01-orchestrated-agent-pipeline.md)**：Pipeline的各阶段实现数据精炼
+- **[Filesystem Data Bus](./STR-02-filesystem-data-bus.md)**：精炼层次体现在目录结构中
+- **[Layered Quality Assurance](./QUA-02-layered-quality-assurance.md)**：每个精炼层次都有质量检查
 
 ## 变体
 

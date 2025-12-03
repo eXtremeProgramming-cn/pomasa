@@ -263,9 +263,9 @@
 
 ## 相关模式
 
-- **[Embedded Quality Standards](./09-embedded-quality-standards.md)**：第一层质量保障的基础
-- **[Orchestrated Agent Pipeline](./06-orchestrated-agent-pipeline.md)**：在Pipeline中插入QA阶段
-- **[Progressive Data Refinement](./08-progressive-data-refinement.md)**：各精炼层次都有质量检查
+- **[Embedded Quality Standards](./QUA-01-embedded-quality-standards.md)**：第一层质量保障的基础
+- **[Orchestrated Agent Pipeline](./BHV-01-orchestrated-agent-pipeline.md)**：在Pipeline中插入QA阶段
+- **[Progressive Data Refinement](./BHV-04-progressive-data-refinement.md)**：各精炼层次都有质量检查
 
 ## 变体
 

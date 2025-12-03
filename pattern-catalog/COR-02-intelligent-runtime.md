@@ -169,9 +169,9 @@ Blueprint中写道：
 
 ## 相关模式
 
-- **[Prompt-Defined Agent](./01-prompt-defined-agent.md)**：本模式是执行Prompt-Defined Agent的基础
-- **[Embedded Quality Standards](./09-embedded-quality-standards.md)**：运行时需要理解并执行质量标准
-- **[Parallel Instance Execution](./07-parallel-instance-execution.md)**：运行时提供并行执行能力
+- **[Prompt-Defined Agent](./COR-01-prompt-defined-agent.md)**：本模式是执行Prompt-Defined Agent的基础
+- **[Embedded Quality Standards](./QUA-01-embedded-quality-standards.md)**：运行时需要理解并执行质量标准
+- **[Parallel Instance Execution](./BHV-03-parallel-instance-execution.md)**：运行时提供并行执行能力
 
 ## 演进方向
 
