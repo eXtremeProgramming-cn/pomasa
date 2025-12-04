@@ -83,13 +83,6 @@ Generator会引导AI：
 
 详见 [pattern-catalog/README.md](./pattern-catalog/README.md)
 
-## 来源
-
-这些模式提炼自实际运行的多智能体系统，包括：
-- industry_assessment：基于ESSCC理论框架的产业分析系统
-
-理论基础见 `references/` 目录下的架构分析文章。
-
 ## 演进计划
 
 POMASA是一个持续演进的项目：
