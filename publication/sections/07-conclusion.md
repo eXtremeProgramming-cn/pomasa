@@ -51,7 +51,7 @@ This paper makes three contributions to the emerging field of declarative multi-
 
 **A pattern language**: POMASA provides 15 patterns organized by category (Core, Structure, Behavior, Quality) and necessity (Must, Recommended, Optional). The patterns address foundational challenges in declarative MAS: agent definition, runtime execution, inter-agent communication, coordination, and quality assurance.
 
-**A case study**: The industry analysis system demonstrates patterns in practice. The system's outputs—including a 50,000-word analysis of the eVTOL industry with 150+ verifiable sources—validate that pattern-based construction produces substantive results.
+**A case study**: The industry analysis system demonstrates patterns in practice. The system's outputs—including a 50,000-word analysis of the eVTOL industry grounded in hundreds of verifiable sources—validate that pattern-based construction produces substantive results.
 
 **An insight about executability**: The paper argues that pattern languages become executable in the AI era. Unlike traditional patterns that require human translation into code, POMASA patterns can be interpreted by AI systems to generate working implementations. This property transforms what "open source" means: publishing patterns equals publishing source.
 

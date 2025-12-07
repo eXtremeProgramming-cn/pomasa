@@ -34,7 +34,7 @@ XIONG Jie, East China Normal University
 EOF
 
 # Append each section in order
-for section in 01-introduction 02-background 03-structure 04-patterns 05-applying 06-insight 07-conclusion; do
+for section in 00-abstract 01-introduction 02-background 03-structure 04-patterns 05-applying 06-insight 07-conclusion; do
     section_file="$SECTIONS_DIR/${section}.md"
     if [ -f "$section_file" ]; then
         echo "  Adding: $section"

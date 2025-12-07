@@ -639,7 +639,7 @@ The critical design choice is that verification runs in an **independent context
 
 **Discussion**: Verifiable data lineage imposes significant overhead. The verification stage may take as long as the collection stage itself, as each URL must be re-visited and content re-examined. For the industry analysis system's 55 functional items, each with multiple sources, verification represents substantial runtime.
 
-This cost is justified for outputs requiring high credibility. The eVTOL analysis report, with its 150+ cited sources, would be worthless if sources proved fictitious upon inspection. In practice, the verification stage consistently identifies and eliminates a non-trivial proportion of initially collected data—URLs that no longer exist, content that doesn't match the claimed summary, or sources that lack credibility. This contaminated data would otherwise propagate through analysis and corrupt conclusions.
+This cost is justified for outputs requiring high credibility. The eVTOL analysis report, with its hundreds of cited sources, would be worthless if sources proved fictitious upon inspection. In practice, the verification stage consistently identifies and eliminates a non-trivial proportion of initially collected data—URLs that no longer exist, content that doesn't match the claimed summary, or sources that lack credibility. This contaminated data would otherwise propagate through analysis and corrupt conclusions.
 
 For systems with lower credibility requirements, this pattern may be relaxed. But for research-oriented MAS producing analytical outputs that humans will rely upon, verifiable data lineage is essential.
 

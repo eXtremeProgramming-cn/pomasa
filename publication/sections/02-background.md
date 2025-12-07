@@ -36,7 +36,7 @@ We selected this system as our running example for several reasons:
 
 **Pattern Coverage**: Building this system required solving most challenges that declarative MAS developers face: agent definition, inter-agent communication, quality assurance, hallucination prevention, parallel execution, and orchestration.
 
-**Verifiable Quality**: The eVTOL analysis report demonstrates that the pattern language approach can produce substantive, academically-rigorous output. The report includes 150+ citations to verifiable sources, structured analysis across multiple dimensions, and actionable policy recommendations—quality markers that validate the underlying architecture.
+**Verifiable Quality**: The eVTOL analysis report demonstrates that the pattern language approach can produce substantive, academically-rigorous output. The report draws on hundreds of citations to verifiable sources, structured analysis across multiple dimensions, and actionable policy recommendations—quality markers that validate the underlying architecture.
 
 ### 2.4 A Glimpse of the Output
 
