@@ -25,9 +25,11 @@ echo "Building POMASA paper..."
 # Assemble markdown from sections (excluding format spec)
 echo "Assembling markdown sections..."
 
-# Start with title
+# Start with title and author
 cat > "$MD_OUTPUT" << 'EOF'
 # POMASA: A Pattern Language for AI-Executable Multi-Agent Systems
+
+XIONG Jie, East China Normal University
 
 EOF
 
@@ -46,24 +48,15 @@ done
 
 echo "Markdown assembled: $MD_OUTPUT"
 
-# Copy images to output directory for pandoc
-echo "Copying images..."
-cp -r "$SCRIPT_DIR/images" "$OUTPUT_DIR/"
-
-# Generate PDF using pandoc (run from output dir so images are found)
+# Generate PDF using pandoc
 echo "Generating PDF..."
-cd "$OUTPUT_DIR"
-pandoc "$(basename "$MD_OUTPUT")" \
-    -o "$(basename "$PDF_OUTPUT")" \
+pandoc "$MD_OUTPUT" \
+    -o "$PDF_OUTPUT" \
     --pdf-engine=xelatex \
     -V geometry:margin=1in \
     -V fontsize=11pt \
     -V mainfont="Times New Roman" \
-    -V monofont="Menlo" \
-    --toc \
-    --toc-depth=3 \
-    -V toc-title="Table of Contents"
-cd "$SCRIPT_DIR"
+    -V monofont="Menlo"
 
 echo "PDF generated: $PDF_OUTPUT"
 

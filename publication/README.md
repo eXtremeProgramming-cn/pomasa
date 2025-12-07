@@ -15,9 +15,6 @@ publication/
 │   ├── 05-applying.md
 │   ├── 06-insight.md
 │   └── 07-conclusion.md
-├── images/             # Figures and diagrams
-│   ├── pattern-relationships.dot   # Graphviz source
-│   └── pattern-relationships.png   # Generated image
 ├── references/         # Reference materials (not included in output)
 ├── _output/            # Generated files (gitignored)
 └── build.sh            # Build script
@@ -38,22 +35,11 @@ publication/
 This will:
 - Clean `_output/` directory
 - Assemble all sections into a single markdown file
-- Copy images
 - Generate PDF with pandoc + xelatex
 
 Output files are timestamped: `pomasa-paper-YYYYMMDD-HHMMSS.{md,pdf}`
-
-## Updating Diagrams
-
-The pattern relationships diagram is generated from Graphviz:
-
-```bash
-cd images
-dot -Tpng -o pattern-relationships.png pattern-relationships.dot
-```
 
 ## Dependencies
 
 - pandoc
 - xelatex (via MacTeX or similar)
-- graphviz (for diagram generation)

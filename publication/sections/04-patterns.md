@@ -1,7 +1,15 @@
 
 ## 4. Essential Patterns
 
-This section presents eight patterns essential to building declarative multi-agent systems, organized by the logical sequence of system construction: runtime foundation → agent definition → knowledge organization → coordination mechanisms → data flow → quality assurance.
+This section presents eight patterns essential to building declarative multi-agent systems. The patterns form an interconnected network, organized here by the logical sequence of system construction.
+
+The foundation is COR-02 (Intelligent Runtime), which provides the execution environment capable of understanding natural language. This runtime enables COR-01 (Prompt-Defined Agent), which allows agents to be defined through natural language blueprints rather than code. Together, these two Core patterns establish the declarative paradigm.
+
+From agent definition, three architectural concerns branch out. First, agents need external knowledge to perform their tasks—STR-01 (Reference Data Configuration) addresses this by separating domain knowledge and methodological guidance from agent blueprints. Second, complex tasks require multiple agents working together—BHV-01 (Orchestrated Agent Pipeline) provides the coordination mechanism, while BHV-02 (Faithful Agent Instantiation) ensures agents are correctly invoked without information loss. Third, AI outputs require quality assurance—QUA-03 (Verifiable Data Lineage) ensures all data can be traced to verifiable sources.
+
+The coordination branch continues: when agents exchange data, they need a communication medium—STR-02 (Filesystem Data Bus) uses the filesystem for transparent, traceable data passing. And when multiple agents access the filesystem, they need boundaries—STR-03 (Workspace Isolation) prevents cross-contamination between projects.
+
+Each pattern below follows a consistent format derived from the pattern language tradition: **Context** (the situation in which the pattern applies), **Problem** (the design challenge being addressed), **Forces** (the competing concerns that make the problem difficult), **Solution** (the recommended approach), **Example** (concrete illustration from the industry analysis system), and **Discussion** (consequences, limitations, and related considerations).
 
 ### 4.1 COR-02: Intelligent Runtime
 
@@ -154,7 +162,7 @@ For each functional item, collect four types of information:
 
 This blueprint tells the agent *what* to collect and *what standards* to meet, not *how* to search or *which websites* to visit.
 
-**Discussion**: Prompt-defined agents trade determinism for adaptability. The same blueprint may produce different execution paths—a feature, not a bug. The agent adapts to what it finds rather than failing when reality doesn't match expectations.
+**Discussion**: Prompt-defined agents trade determinism for adaptability. The same blueprint may produce different execution paths—a feature, not a bug. The agent adapts to what it finds rather than failing when reality doesn't match expectations. This declarative approach to agent definition has been validated by prior work such as Generative Agents[^5], which demonstrated that natural language specifications can produce believable autonomous behavior.
 
 The pattern also dramatically lowers the barrier to system maintenance. Domain experts who cannot program can read, understand, and modify agent blueprints. This democratizes system evolution.
 
@@ -222,7 +230,7 @@ The `theoretical_framework_explained.md` file contains the complete ESSCC framew
 
 **Discussion**: Reference data configuration enables separation of concerns. Domain experts maintain domain knowledge; methodology experts maintain methodological guidance; system developers maintain agent blueprints. Each can evolve independently.
 
-The pattern also supports system reuse. The same agent blueprints can be applied to different domains by swapping reference data—a different theoretical framework yields a different analysis system.
+The pattern also supports system reuse. The same agent blueprints can be applied to different domains by swapping reference data—a different theoretical framework yields a different analysis system. This approach shares conceptual similarities with Retrieval-Augmented Generation (RAG)[^6], though RAG typically retrieves knowledge dynamically at inference time, while reference data configuration pre-positions knowledge that agents consult during execution.
 
 ### 4.4 BHV-01: Orchestrated Agent Pipeline
 
@@ -315,7 +323,7 @@ The Orchestrator agent:
 - Wait for completion
 ```
 
-**Discussion**: The orchestrated pipeline pattern trades flexibility for predictability. The fixed stage sequence constrains what the system can do but makes behavior comprehensible and debuggable. When something goes wrong, you know which stage failed.
+**Discussion**: The orchestrated pipeline pattern trades flexibility for predictability. The fixed stage sequence constrains what the system can do but makes behavior comprehensible and debuggable. When something goes wrong, you know which stage failed. This pattern relates to multi-agent coordination approaches in systems like AutoGen[^7] and MetaGPT[^8], though POMASA emphasizes declarative blueprints over programmatic agent definitions.
 
 The pattern also enables incremental execution. If Stage 3 fails, Stages 1 and 2 outputs remain intact. The system can resume from the failed stage rather than starting over.
 
@@ -551,7 +559,7 @@ This convention-based approach has an important benefit: the constraint is visib
 
 **Problem**: How do you ensure that data and conclusions produced by the AI system are trustworthy?
 
-AI systems, especially LLMs, suffer from severe "hallucination" problems: they may fabricate non-existent data, invent URLs, and create fictitious citations. Even when blueprints explicitly require data verification, within the same execution context, AI often cannot effectively identify hallucinations it produced earlier.
+AI systems, especially LLMs, suffer from severe "hallucination" problems[^9]: they may fabricate non-existent data, invent URLs, and create fictitious citations. Even when blueprints explicitly require data verification, within the same execution context, AI often cannot effectively identify hallucinations it produced earlier.
 
 This problem is especially severe in research-oriented MAS because:
 
@@ -580,23 +588,19 @@ Core principles:
 
 5. **Unqualified data handling**: Untruthful data—firmly eliminate. Low-credibility sources—downgrade or eliminate. Uncertain credibility—clearly mark.
 
-The data lineage chain:
+The data lineage chain works as follows:
 
-```
-External Source (URL/Academic Citation)
-    |
-    v
-Raw Material [ID: SRC-001]
-    | ← Post-collection verification: verify URL valid, content matches
-    v
-Analysis Material [ID: ANA-001, cites: SRC-001, SRC-003]
-    | ← Post-analysis verification: verify citations accurate, arguments valid
-    v
-Final Report [References: URL list]
-    |
-    v
-Externally Verifiable
-```
+1. **Collection**: An agent collects data from external sources. Each data item is assigned a unique identifier (e.g., SRC-001) and must include its source URL or academic citation.
+
+2. **Post-collection verification**: A separate verifier agent—running in an independent context with no memory of the collection process—visits each URL to confirm the source exists and the collected content accurately reflects it. Data that fails verification is eliminated.
+
+3. **Analysis**: Analyzer agents process verified data to produce analytical materials. Each analysis item (e.g., ANA-001) explicitly cites the raw material identifiers it draws from (e.g., "cites: SRC-001, SRC-003").
+
+4. **Post-analysis verification**: Another verification pass confirms that citations accurately support the conclusions drawn. Arguments that misrepresent or overreach their sources are flagged.
+
+5. **Report generation**: The final report includes a reference list pointing back to the original external sources. Any reader can trace any claim back through the analysis to its verified source.
+
+The end result is a complete audit trail: every claim in the final output can be traced back to a verifiable external source, with verification checkpoints at each transformation stage.
 
 **Example**: The industry analysis system includes a dedicated Data Verifier agent (`03.data_verifier.md`) that runs after deep research completes:
 
@@ -635,7 +639,17 @@ The critical design choice is that verification runs in an **independent context
 
 **Discussion**: Verifiable data lineage imposes significant overhead. The verification stage may take as long as the collection stage itself, as each URL must be re-visited and content re-examined. For the industry analysis system's 55 functional items, each with multiple sources, verification represents substantial runtime.
 
-This cost is justified for outputs requiring high credibility. The eVTOL analysis report, with its 150+ cited sources, would be worthless if sources proved fictitious upon inspection. The verification stage caught and eliminated approximately 8-12% of initially collected data in test runs—a significant proportion that would have contaminated subsequent analysis.
+This cost is justified for outputs requiring high credibility. The eVTOL analysis report, with its 150+ cited sources, would be worthless if sources proved fictitious upon inspection. In practice, the verification stage consistently identifies and eliminates a non-trivial proportion of initially collected data—URLs that no longer exist, content that doesn't match the claimed summary, or sources that lack credibility. This contaminated data would otherwise propagate through analysis and corrupt conclusions.
 
 For systems with lower credibility requirements, this pattern may be relaxed. But for research-oriented MAS producing analytical outputs that humans will rely upon, verifiable data lineage is essential.
+
+[^5]: Park, J.S., O'Brien, J.C., Cai, C.J., Morris, M.R., Liang, P. and Bernstein, M.S., 2023. Generative Agents: Interactive Simulacra of Human Behavior. *Proceedings of the 36th Annual ACM Symposium on User Interface Software and Technology (UIST '23)*. ACM.
+
+[^6]: Lewis, P., Perez, E., Piktus, A., Petroni, F., Karpukhin, V., Goyal, N., Küttler, H., Lewis, M., Yih, W., Rocktäschel, T., Riedel, S. and Kiela, D., 2020. Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks. *Advances in Neural Information Processing Systems*, 33, pp.9459-9474.
+
+[^7]: Wu, Q., Bansal, G., Zhang, J., Wu, Y., Zhang, S., Zhu, E., Li, B., Jiang, L., Zhang, X. and Wang, C., 2023. AutoGen: Enabling Next-Gen LLM Applications via Multi-Agent Conversation. *arXiv preprint arXiv:2308.08155*.
+
+[^8]: Hong, S., Zhuge, M., Chen, J., Zheng, X., Cheng, Y., Zhang, C., Wang, J., Wang, Z., Yau, S.K.S., Lin, Z., Zhou, L., Ran, C., Xiao, L., Wu, C. and Schmidhuber, J., 2024. MetaGPT: Meta Programming for A Multi-Agent Collaborative Framework. *Proceedings of the Twelfth International Conference on Learning Representations (ICLR 2024)*.
+
+[^9]: Huang, L., Yu, W., Ma, W., Zhong, W., Feng, Z., Wang, H., Chen, Q., Peng, W., Feng, X., Qin, B. and Liu, T., 2023. A Survey on Hallucination in Large Language Models: Principles, Taxonomy, Challenges, and Open Questions. *arXiv preprint arXiv:2311.05232*.
 

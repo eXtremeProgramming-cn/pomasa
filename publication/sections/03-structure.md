@@ -1,7 +1,7 @@
 
 ## 3. The Pattern Language Structure
 
-POMASA organizes its patterns through two orthogonal classification schemes: a categorical taxonomy that groups patterns by their architectural concern, and a necessity hierarchy that indicates how critical each pattern is to system viability.
+POMASA organizes its patterns through two orthogonal classification schemes: a categorical taxonomy that groups patterns by their architectural concern, and a necessity hierarchy that indicates how critical each pattern is to system viability. This organizational approach draws inspiration from the Pattern-Oriented Software Architecture (POSA) series[^4], which demonstrated the value of systematic pattern classification.
 
 ### 3.1 Categorical Taxonomy
 
@@ -25,42 +25,38 @@ Orthogonal to categorical classification, each pattern carries a necessity level
 
 **Optional**: Patterns that address specific scenarios or provide additional capabilities. Systems should adopt these based on their particular requirements. Currently: 3 patterns.
 
-### 3.3 The Pattern Matrix
+### 3.3 The Pattern Catalog
 
-Combining these two dimensions yields the following matrix:
+Combining these two dimensions yields the following catalog:
 
-| Category | Must | Recommended | Optional |
-|----------|-----------|-------------|----------|
-| **COR** | COR-01: Prompt-Defined Agent | — | — |
-|         | COR-02: Intelligent Runtime | | |
-| **STR** | — | STR-01: Reference Data Configuration | — |
-|         | | STR-02: Filesystem Data Bus | |
-|         | | STR-03: Workspace Isolation | |
-|         | | STR-04: Business-Driven Agent Design | |
-|         | | STR-05: Composable Document Assembly | |
-|         | | STR-06: Methodological Guidance | |
-| **BHV** | BHV-02: Faithful Agent Instantiation | BHV-01: Orchestrated Agent Pipeline | BHV-03: Parallel Instance Execution |
-|         | | | BHV-04: Progressive Data Refinement |
-| **QUA** | QUA-03: Verifiable Data Lineage | QUA-01: Embedded Quality Standards | QUA-02: Layered Quality Assurance |
+**COR (Core)** — Must:
 
-### 3.4 Pattern Relationships
+- COR-01: Prompt-Defined Agent
+- COR-02: Intelligent Runtime
 
-Patterns do not exist in isolation; they form a network of dependencies and reinforcements:
+**STR (Structure)** — Recommended:
 
-![Pattern Relationships](images/pattern-relationships.png)
+- STR-01: Reference Data Configuration
+- STR-02: Filesystem Data Bus
+- STR-03: Workspace Isolation
+- STR-04: Business-Driven Agent Design
+- STR-05: Composable Document Assembly
+- STR-06: Methodological Guidance
 
-The diagram reveals the architecture's foundation: COR-02 (Intelligent Runtime) enables COR-01 (Prompt-Defined Agent), which in turn makes all other patterns possible. The three branches—reference data management, execution coordination, and quality assurance—represent the primary architectural concerns that Structure, Behavior, and Quality patterns address.
+**BHV (Behavior)** — Mixed:
 
-### 3.5 Reading the Patterns
+- BHV-01: Orchestrated Agent Pipeline (Recommended)
+- BHV-02: Faithful Agent Instantiation (Must)
+- BHV-03: Parallel Instance Execution (Optional)
+- BHV-04: Progressive Data Refinement (Optional)
 
-Each pattern in the following section follows a consistent format derived from the pattern language tradition:
+**QUA (Quality)** — Mixed:
 
-- **Context**: The situation in which the pattern applies
-- **Problem**: The design challenge being addressed
-- **Forces**: The competing concerns that make the problem difficult
-- **Solution**: The recommended approach
-- **Example**: Concrete illustration from the industry analysis system
-- **Discussion**: Consequences, limitations, and related considerations
+- QUA-01: Embedded Quality Standards (Recommended)
+- QUA-02: Layered Quality Assurance (Optional)
+- QUA-03: Verifiable Data Lineage (Must)
 
-This format makes patterns comparable and composable—readers can evaluate whether a pattern's context matches their situation and weigh the forces against their priorities.
+The following section presents eight essential patterns in detail. Complete documentation for all 15 patterns is available in the POMASA repository at https://github.com/eXtremeProgramming-cn/pomasa.
+
+[^4]: Buschmann, F., Meunier, R., Rohnert, H., Sommerlad, P. and Stal, M., 1996. *Pattern-Oriented Software Architecture: A System of Patterns*. Wiley.
 
