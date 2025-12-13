@@ -1,7 +1,7 @@
 # Reference Data Configuration
 
 **Category**: Structure
-**Necessity**: Recommended
+**Necessity**: Required
 
 ## Problem
 
@@ -156,17 +156,64 @@ Correct approach:
 |----------------|-------------------|
 | Markdown files | Copy directly to references/domain/ |
 | PDF files | Convert to Markdown and preserve in full |
-| Word documents | Convert to Markdown and preserve in full |
-| Web content | Save as Markdown, note the source URL |
+| Word documents (.docx) | Convert to Markdown and preserve in full |
+| Web pages (URL) | Fetch full content, convert to Markdown, save locally |
+
+**Critical: Preserve All Rich Text Elements**
+
+When converting to Markdown, the following elements must be faithfully preserved:
+
+| Element | Importance | Handling Method |
+|---------|------------|-----------------|
+| Hyperlinks | High | Convert to Markdown link format `[text](url)` |
+| Footnotes/Endnotes | High | Convert to Markdown footnote format `[^1]` |
+| Citations/References | High | Preserve full citation info, convert to link where possible |
+| Tables | Medium | Convert to Markdown table format |
+| Images | Medium | Download locally, use relative path reference |
+| Headings structure | Medium | Preserve heading hierarchy with # syntax |
+| Lists (ordered/unordered) | Medium | Convert to Markdown list format |
+| Bold/Italic emphasis | Low | Convert to `**bold**` and `*italic*` |
+
+**Why preserve these elements:**
+
+- **Hyperlinks**: External links are valuable sources that readers can verify; internal links reveal document structure
+- **Footnotes**: Often contain important supplementary information, academic sources, or nuanced explanations
+- **Citations**: The foundation of data lineage; losing citations breaks the verification chain (see [QUA-03 Verifiable Data Lineage](./QUA-03-verifiable-data-lineage.md))
+
+**Web Content Special Handling:**
+
+When the source is a web URL:
+
+1. **Fetch full content**: Download the complete page, not just a summary or excerpt
+2. **Preserve all links**: External links often point to primary sources or related materials
+3. **Record source metadata**: Add a YAML frontmatter block:
+   ```markdown
+   ---
+   source_url: https://example.com/article
+   fetched_at: 2024-01-15T10:30:00Z
+   title: Original Page Title
+   ---
+   ```
+4. **Handle dynamic content**: If the page has important dynamic content, note what may be missing
 
 ```
 # Incorrect Example
 User provides a 50-page theoretical framework document, AI "helpfully"
 summarizes it to a 5-page essence when generating the system.
 
+# Also Incorrect Example
+User provides a URL, AI only extracts the main text, discarding all
+hyperlinks, footnotes, and sidebar content.
+
 # Correct Example
-User provides a 50-page theoretical framework document, copied in full to
+User provides a 50-page theoretical framework document, converted to
+Markdown with all footnotes and citations intact, saved to
 references/domain/theoretical_framework.md
+
+# Also Correct Example
+User provides a URL, AI fetches the full page, converts to Markdown
+preserving all links and structure, adds source metadata, saves to
+references/domain/article_title.md
 ```
 
 **Exception**: If source materials are truly excessively lengthy (e.g., entire books), discuss with the user how to handle it rather than AI deciding to summarize on its own.

@@ -52,8 +52,9 @@ Referring to the selected pattern documents, generate:
 │   ├── 01.{first_agent}.md
 │   ├── 02.{second_agent}.md
 │   └── ...
-├── references/              # Reference Data
-│   └── ...
+├── references/              # Reference Data (processed from user materials)
+│   ├── domain/              # Domain knowledge (converted to Markdown)
+│   └── methodology/         # Methodological guidance
 ├── data/                    # Runtime Data (directory structure)
 │   └── ...
 ├── wip/                     # Work in Progress

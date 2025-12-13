@@ -83,7 +83,7 @@ Patterns are grouped by category, identified by a three-letter prefix:
 
 | ID | Pattern | Necessity | Description |
 |----|---------|-----------|-------------|
-| STR-01 | [Reference Data Configuration](./STR-01-reference-data-configuration.md) | Recommended | Externalize domain knowledge as independent configuration |
+| STR-01 | [Reference Data Configuration](./STR-01-reference-data-configuration.md) | Required | Externalize domain knowledge as independent configuration |
 | STR-02 | [Filesystem Data Bus](./STR-02-filesystem-data-bus.md) | Recommended | Use filesystem as data transfer mechanism between Agents |
 | STR-03 | [Workspace Isolation](./STR-03-workspace-isolation.md) | Recommended | Restrict Agents to work only within designated directories |
 | STR-04 | [Business-Driven Agent Design](./STR-04-business-driven-agent-design.md) | Recommended | Agent division follows business process, numbered by execution order |
@@ -172,6 +172,7 @@ Patterns are grouped by category, identified by a three-letter prefix:
 
 1. **Required Patterns**: First ensure adoption of all patterns marked as "Required"
    - COR-01, COR-02 (Core)
+   - STR-01 (Structure)
    - BHV-02 (Behavior)
    - QUA-03 (Quality)
 2. **Evaluate Recommended Patterns**: Assess whether each "Recommended" pattern applies based on system requirements

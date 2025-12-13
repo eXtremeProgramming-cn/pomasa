@@ -42,7 +42,10 @@ For items you are uncertain about, you can write "to be suggested by AI", and th
 
 **Existing Reference Materials**:
 
-[List: If you already have some reference materials to include in the system, list file paths or descriptions here]
+List your reference materials below (file paths or URLs). The Generator will convert all materials to Markdown format according to [STR-01 Reference Data Configuration](./pattern-catalog/STR-01-reference-data-configuration.md).
+
+- [file path, URL, or description]
+- ...
 
 ---
 
