@@ -1,0 +1,25 @@
+{
+  "app": {
+    "title": "POMASA",
+    "subtitle": "Pattern-Oriented Multi-Agent System Architecture"
+  },
+  "home": {
+    "viewMas": "View Existing MAS",
+    "createMas": "Create New MAS",
+    "recentlyOpened": "Recently Opened",
+    "createNotImplemented": "Create MAS feature is not implemented yet"
+  },
+  "view": {
+    "loading": "Loading...",
+    "backToHome": "Back to Home",
+    "selectFileToView": "Select a file from the left to view its content",
+    "failedToLoadMas": "Failed to load MAS info",
+    "failedToLoadFile": "Failed to load file"
+  },
+  "common": {
+    "error": "Error",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "close": "Close"
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "app": {
+    "title": "POMASA",
+    "subtitle": "面向模式的多智能体系统架构"
+  },
+  "home": {
+    "viewMas": "查看已有MAS",
+    "createMas": "新建MAS",
+    "recentlyOpened": "最近打开",
+    "createNotImplemented": "新建MAS功能暂未实现"
+  },
+  "view": {
+    "loading": "加载中...",
+    "backToHome": "返回首页",
+    "selectFileToView": "选择左侧文件查看内容",
+    "failedToLoadMas": "加载MAS信息失败",
+    "failedToLoadFile": "加载文件失败"
+  },
+  "common": {
+    "error": "错误",
+    "cancel": "取消",
+    "confirm": "确认",
+    "close": "关闭"
+  }
+}
