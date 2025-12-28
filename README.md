@@ -24,6 +24,16 @@ POMASA adopts a "pattern language + generator" approach:
 1. **Pattern Catalog** (`pattern-catalog/`): Reusable architectural patterns extracted from real systems, each describing a specific problem and its solution
 2. **Generator** (`generator.md`): A prompt that guides AI to build new systems based on patterns
 
+### Architecture Overview
+
+![POMASA Architecture](./pomasa-explained.png)
+
+POMASA patterns are organized into four categories (shown on the left), governing three architectural layers:
+
+- **Definition Layer**: Blueprints define Agent behavior; Reference Data provides domain knowledge and methodology
+- **Execution Layer**: Intelligent Runtime executes Blueprints; Orchestrator coordinates Workers through staged pipelines
+- **Data Layer**: File System serves as the data bus, with data progressively refined from Materials → Drafts → Final outputs
+
 ### Core Principles
 
 - **Patterns are knowledge carriers**: Transform tacit architectural experience into explicit, shareable patterns
