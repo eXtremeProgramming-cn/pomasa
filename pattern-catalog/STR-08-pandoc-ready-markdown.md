@@ -128,20 +128,36 @@ When generating Chinese-language documents, use proper Chinese punctuation marks
 **Correction Method**: If post-processing is needed, use paired replacement:
 
 ```python
-def replace_quotes(text):
+def fix_quotes(text):
     """Replace ASCII quotes with Chinese fullwidth quotes."""
+    # Unicode characters
+    LEFT_DOUBLE = '\u201c'   # "
+    RIGHT_DOUBLE = '\u201d'  # "
+    LEFT_SINGLE = '\u2018'   # '
+    RIGHT_SINGLE = '\u2019'  # '
+
     result = []
-    in_quote = False
+    in_double_quote = False
+    in_single_quote = False
+
     for char in text:
         if char == '"':
-            if not in_quote:
-                result.append('\u201C')  # "
-                in_quote = True
+            if not in_double_quote:
+                result.append(LEFT_DOUBLE)
+                in_double_quote = True
             else:
-                result.append('\u201D')  # "
-                in_quote = False
+                result.append(RIGHT_DOUBLE)
+                in_double_quote = False
+        elif char == "'":
+            if not in_single_quote:
+                result.append(LEFT_SINGLE)
+                in_single_quote = True
+            else:
+                result.append(RIGHT_SINGLE)
+                in_single_quote = False
         else:
             result.append(char)
+
     return ''.join(result)
 ```
 
