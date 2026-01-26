@@ -16,7 +16,7 @@ This pattern applies to the following scenarios:
 - Tasks require semantic understanding capabilities (such as information extraction, content generation, quality judgment)
 - Task details may change frequently (such as data source format changes)
 - Non-programmers need to be able to understand and maintain system behavior
-- There is an intelligent runtime environment (such as Claude Code) to support execution
+- There is an intelligent runtime environment (such as Claude Code, Cursor, Cline) to support execution
 
 ## Forces
 

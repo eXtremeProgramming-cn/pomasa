@@ -121,6 +121,26 @@ Read the pattern documents under `skills/pomasa/pattern-catalog/` directly to le
 
 See [skills/pomasa/pattern-catalog/README.md](./skills/pomasa/pattern-catalog/README.md)
 
+## Tool Compatibility
+
+POMASA patterns are primarily written and tested with Claude Code. The patterns reference these common tool capabilities:
+
+| Tool Category | Purpose | Claude Code Example |
+|--------------|---------|---------------------|
+| **File Read** | Read file contents | `Read` |
+| **File Write** | Create or overwrite files | `Write` |
+| **File Edit** | Modify existing files | `Edit` |
+| **File Search** | Find files by pattern | `Glob` |
+| **Content Search** | Search text in files | `Grep` |
+| **Web Search** | Find web pages | `WebSearch` |
+| **Web Fetch** | Retrieve web page content | `WebFetch` |
+| **Command Execution** | Run shell commands | `Bash` |
+| **Subagent Launch** | Start a child agent | `Task` |
+
+**For other runtimes** (Cursor, Cline, Windsurf, etc.): If your runtime uses different tool names or doesn't have a particular tool, find an equivalent in your environment. The patterns describe *what* capability is needed, not *which specific tool* to use.
+
+**MCP Tools**: Some patterns mention MCP (Model Context Protocol) tools with naming format `mcp__server__tool`. These are specific to runtimes that support MCP. If your runtime doesn't support MCP, use the built-in equivalents (e.g., use `WebSearch` instead of an MCP search tool).
+
 ## Evolution Plan
 
 POMASA is a continuously evolving project:

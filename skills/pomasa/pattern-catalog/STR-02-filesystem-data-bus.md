@@ -73,7 +73,7 @@ workspace/
 - **Ultimate Simplicity**: No middleware needed, zero configuration
 - **Fully Auditable**: All data visible and traceable
 - **Human Readable**: JSON and Markdown formats directly readable
-- **AI Runtime Friendly**: Naturally fits Claude Code's file tools
+- **AI Runtime Friendly**: Naturally fits AI runtime file tools
 - **Version Control Friendly**: Can use Git to manage data versions
 - **Zero-Config Collaboration**: Collaboration through directory conventions rather than explicit configuration
 

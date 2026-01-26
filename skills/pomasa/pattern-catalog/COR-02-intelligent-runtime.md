@@ -84,9 +84,9 @@ Layer 1: Basic Execution Capabilities
 
 ## Implementation Guidelines
 
-### Claude Code as Intelligent Runtime
+### Example: Claude Code as Intelligent Runtime
 
-The most mature implementation of intelligent runtime currently is Claude Code, which provides:
+Claude Code is one implementation of intelligent runtime. Other AI coding assistants (such as Cursor, Cline, Windsurf) provide similar capabilities. This section uses Claude Code as an example to illustrate:
 
 **Basic Capabilities**:
 - File reading/writing: Read, Write, Edit tools
@@ -95,9 +95,9 @@ The most mature implementation of intelligent runtime currently is Claude Code, 
 - Command execution: Bash tool
 
 **Agent Management**:
-- Launch Agent instances via Task tool
-- Initiate multiple Tasks in the same message for parallelism
-- Each Agent instance has independent context
+- Launch subagents (Agent instances)
+- Launch multiple subagents in the same message for parallelism
+- Each subagent has independent context
 
 **Intelligent Decision-making**:
 - Understand natural language Blueprints

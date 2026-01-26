@@ -56,9 +56,9 @@ Orchestrator
    - Read configuration data to determine partitions (e.g., organization list)
    - Number of partitions determines degree of parallelism
 
-2. **Batch Task Launch**:
-   - Orchestrator initiates multiple Tasks in the same message
-   - Runtime automatically identifies parallel opportunities
+2. **Batch Subagent Launch**:
+   - Orchestrator launches multiple subagents in the same message
+   - Runtime automatically handles parallel execution
 
 3. **Independent Execution**:
    - Each Instance has independent context
@@ -74,7 +74,7 @@ Orchestrator
 
 - **Significant performance improvement**: Near-linear speedup (for I/O-intensive tasks)
 - **Full utilization of wait time**: Network requests wait in parallel
-- **Simple implementation**: Declarative parallelism (launch multiple Tasks in the same message)
+- **Simple implementation**: Declarative parallelism (launch multiple subagents in the same message)
 - **Data-driven scalability**: As partition count increases, parallelism automatically increases
 - **Good fault isolation**: Single Instance failure does not affect other Instances
 
@@ -112,7 +112,7 @@ When the number of partitions exceeds 7, use **Batch Parallelism** (see Variants
 - Tasks require global perspective (e.g., consolidation reports)
 - Shared state requires synchronization
 
-### Launching Parallel Tasks in Orchestrator
+### Launching Parallel Subagents in Orchestrator
 
 ```markdown
 ## Stage One Execution
@@ -121,12 +121,12 @@ When the number of partitions exceeds 7, use **Batch Parallelism** (see Variants
 
 1. Read `references/organizations.json` to get organization list
 2. Read `agents/01.research_agent.md` to get Agent Blueprint
-3. **In the same message** launch Task for each organization:
-   - Task 1: Research Agent for Organization A
-   - Task 2: Research Agent for Organization B
-   - Task 3: Research Agent for Organization C
+3. **In the same message** launch a subagent for each organization:
+   - Subagent 1: Research Agent for Organization A
+   - Subagent 2: Research Agent for Organization B
+   - Subagent 3: Research Agent for Organization C
    - ...
-4. Wait for all Tasks to complete
+4. Wait for all subagents to complete
 5. Verify output completeness for each partition
 ```
 
@@ -191,9 +191,9 @@ If collection for an Organization fails:
 1. Read question list to determine all function items
 2. For each function item {FUNCTION_ID}:
    - Read corresponding question list
-   - Launch Deep Researcher Task
+   - Launch Deep Researcher subagent
    - Parameters: {INDUSTRY_ID}, {FUNCTION_ID}, {FUNCTION_NAME}
-3. Wait for all Tasks to complete
+3. Wait for all subagents to complete
 
 ### Output Directory
 workspace/{INDUSTRY_ID}/01.materials/03.deep_research/

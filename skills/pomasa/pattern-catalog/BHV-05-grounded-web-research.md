@@ -49,20 +49,20 @@ This pattern may be skipped when:
 
 ### The Two-Tool Distinction
 
-| Tool | Purpose | Output Reliability | Use Case |
-|------|---------|-------------------|----------|
-| **WebSearch** | Find potentially relevant URLs | **Low** - summaries are unreliable | Discovering sources, getting leads |
-| **WebFetch** | Retrieve actual page content | **High** - original content | Obtaining content to preserve |
+| Tool Type | Purpose | Output Reliability | Use Case |
+|-----------|---------|-------------------|----------|
+| **Search tool** (e.g., WebSearch) | Find potentially relevant URLs | **Low** - summaries are unreliable | Discovering sources, getting leads |
+| **Fetch tool** (e.g., WebFetch) | Retrieve actual page content | **High** - original content | Obtaining content to preserve |
 
 ### Core Principles
 
 1. **Search Results Are Leads, Not Data**
-   - WebSearch returns URLs and summaries
+   - Search tools return URLs and summaries
    - Summaries may be inaccurate, outdated, or hallucinated
    - Never quote or cite information from search summaries directly
 
 2. **Fetch Before You Save**
-   - Every piece of information must come from WebFetch content
+   - Every piece of information must come from fetched page content
    - If a page cannot be fetched, that information cannot be used
 
 3. **Preserve Original Content in Full**
@@ -91,7 +91,7 @@ Separating collection from analysis provides several advantages:
 ```
 Step 1: Search for Leads
         │
-        │  WebSearch("topic keywords")
+        │  Use search tool ("topic keywords")
         │
         ▼
 Step 2: Review Search Results
@@ -102,7 +102,7 @@ Step 2: Review Search Results
         ▼
 Step 3: Fetch Original Content
         │
-        │  WebFetch(url) for each promising URL
+        │  Use fetch tool (url) for each promising URL
         │
         ▼
 Step 4: Save Complete Content
@@ -144,7 +144,7 @@ Step 4: Save Complete Content
 When collecting information from the web:
 
 ### Step 1: Search for Sources
-Use WebSearch to find potentially relevant pages. The search results give you
+Use the search tool to find potentially relevant pages. The search results give you
 **URLs to investigate**, not facts to use directly.
 
 **Important**: Search result summaries are NOT reliable. Do not quote or use
@@ -153,7 +153,7 @@ to fetch.
 
 ### Step 2: Fetch Original Content
 For each promising URL from search results:
-1. Use WebFetch to retrieve the actual page content
+1. Use the fetch tool to retrieve the actual page content
 2. Verify the fetch was successful
 
 ### Step 3: Save Complete Content with Metadata
@@ -181,7 +181,7 @@ access to the full original.
 ```markdown
 ## When Pages Cannot Be Fetched
 
-If WebFetch fails for a URL:
+If the fetch tool fails for a URL:
 1. Try an alternative URL for the same information
 2. Search for other sources covering the same topic
 3. If no accessible source exists, **do not use that information**
@@ -196,13 +196,13 @@ The correct response is to find another source or acknowledge the gap.
 ## [SRC-XXX] Source Title
 
 **Source URL**: [The URL that was actually fetched]
-**Fetch Time**: [When WebFetch was performed]
+**Fetch Time**: [When the fetch was performed]
 **Source Type**: [Academic Article / Policy Document / News Report / ...]
 **Credibility**: [High / Medium / Low - based on source authority, not content]
 
 **Original Content**:
 
-[Complete content from WebFetch, preserved verbatim]
+[Complete content from fetch tool, preserved verbatim]
 ```
 
 Note: The format is intentionally minimal. No "extracted content", "key quotes", or "relevance assessment" fields—these require interpretation and belong to the analysis phase.
@@ -308,7 +308,7 @@ In Standard and Strict modes, the Orchestrator should verify that data collectio
 
 ## Related Patterns
 
-- **[Intelligent Runtime](./COR-02-intelligent-runtime.md)**: Provides WebSearch and WebFetch tools
+- **[Intelligent Runtime](./COR-02-intelligent-runtime.md)**: Provides search and fetch tools
 - **[Methodological Guidance](./STR-06-methodological-guidance.md)**: Defines what types of sources are credible (orthogonal to how they are obtained)
 - **[Verifiable Data Lineage](./QUA-03-verifiable-data-lineage.md)**: Requires traceable sources; this pattern ensures sources are real and complete
 - **[Embedded Quality Standards](./QUA-01-embedded-quality-standards.md)**: Data collection standards should include preservation requirements
@@ -319,7 +319,7 @@ In Standard and Strict modes, the Orchestrator should verify that data collectio
 When designing data collection agents, confirm:
 
 - [ ] Blueprint explicitly states that search summaries are not reliable data?
-- [ ] Blueprint requires WebFetch before saving any web information?
+- [ ] Blueprint requires fetching page content before saving any web information?
 - [ ] Blueprint explicitly prohibits summarizing or extracting during collection?
 - [ ] Data recording format preserves complete original content?
 - [ ] Data recording format includes fetch timestamp?
