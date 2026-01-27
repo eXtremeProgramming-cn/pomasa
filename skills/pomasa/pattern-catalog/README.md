@@ -69,6 +69,7 @@ Patterns are grouped by category, identified by a three-letter prefix:
 - **Required**: Patterns that must be adopted when building declarative MAS systems
 - **Recommended**: Strongly advised to adopt, unless there is a clear reason not to
 - **Optional**: Choose whether to adopt based on specific scenarios
+- **Deprecated**: Patterns that are no longer recommended; kept for reference only
 
 ## Pattern Overview
 
@@ -89,7 +90,7 @@ Patterns are grouped by category, identified by a three-letter prefix:
 | STR-04 | [Business-Driven Agent Design](./STR-04-business-driven-agent-design.md) | Recommended | Agent division follows business process, numbered by execution order |
 | STR-05 | [Composable Document Assembly](./STR-05-composable-document-assembly.md) | Recommended | Generate long documents by sections, standardize format, mechanically assemble |
 | STR-06 | [Methodological Guidance](./STR-06-methodological-guidance.md) | Required | Methodological guidance: data sources, analysis methods, output templates |
-| STR-07 | [Concept-to-Questions Decomposition](./STR-07-concept-to-questions.md) | Optional | Transform abstract concepts into concrete question items via conceptualization and operationalization |
+| STR-07 | [Reverse-Engineered Research Questions](./STR-07-reverse-engineered-research-questions.md) | Recommended | Generate research questions by reverse-engineering existing documents and identifying gaps from analytical stance |
 | STR-08 | [Pandoc-Ready Markdown Format](./STR-08-pandoc-ready-markdown.md) | Recommended | Markdown format specification ensuring correct conversion to DOCX/PDF |
 | STR-09 | [Deliverable Export Pipeline](./STR-09-deliverable-export-pipeline.md) | Recommended | Export final reports to DOCX/PDF with templates and timestamped filenames |
 
@@ -138,8 +139,8 @@ Patterns are grouped by category, identified by a three-letter prefix:
      │               │                    │
 ┌────▼────┐   ┌──────▼──────┐             │
 │ STR-06  │   │   STR-07    │             │
-│ Method. │   │  Concept-to │             │
-│ Guidance│   │  Questions  │             │
+│ Method. │   │  Reverse-   │             │
+│ Guidance│   │  Eng. Qs    │             │
 └────┬────┘   └──────┬──────┘             │
      └───────┬───────┘                    │
              │                            │
@@ -195,6 +196,7 @@ Patterns are grouped by category, identified by a three-letter prefix:
 
 ## Version History
 
+- **v0.11** (2026-01): Replaced STR-07 with Reverse-Engineered Research Questions (practical alternative to the abstract conceptualization approach)
 - **v0.10** (2026-01): Upgraded STR-06 Methodological Guidance to Required (was Recommended); STR-01 and STR-06 are now a mandatory pair
 - **v0.9** (2026-01): Added BHV-06 Configurable Tool Binding for custom search/fetch tools with fallback
 - **v0.8** (2026-01): Added STR-09 Deliverable Export Pipeline for exporting final reports to DOCX/PDF
