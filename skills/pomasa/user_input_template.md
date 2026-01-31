@@ -93,29 +93,8 @@ For the complete pattern list, see [pattern-catalog/README.md](./pattern-catalog
 
 ---
 
-## Custom Tools Configuration (Optional)
-
-If you have custom MCP tools for web research, you can configure them here. This is useful for:
-- **Enhanced capabilities**: Commercial services (e.g., Oxylabs) can bypass paywalls
-- **Cost optimization**: Self-hosted tools can reduce AI provider API quota consumption
-
-**Custom Web Search Tool**:
-
-[Fill in: Tool name for web search, e.g., `mcp__crawl4ai__search` or `mcp__serper-search__google_search`. Leave blank to use default `WebSearch`]
-
-**Custom Web Fetch Tool**:
-
-[Fill in: Tool name for fetching web content, e.g., `mcp__crawl4ai__read_url` or `mcp__serper-search__scrape`. Leave blank to use default `WebFetch`]
-
-**Fallback Strategy**:
-
-- [x] Fallback to default tools when custom tools fail (recommended)
-- [ ] Use custom tools only, fail if unavailable
-
-For more details, see [BHV-06 Configurable Tool Binding](./pattern-catalog/BHV-06-configurable-tool-binding.md).
-
----
-
 ## Other Requirements
+
+*Advanced users: If you need to override the default web tool priorities, see [BHV-06 Configurable Tool Binding](./pattern-catalog/BHV-06-configurable-tool-binding.md).*
 
 [Fill in: Any other constraints, expectations, or special requirements. If none, write "None"]

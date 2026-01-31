@@ -1,284 +1,203 @@
 # Configurable Tool Binding
 
 **Category**: Behavior
-**Necessity**: Optional
+**Necessity**: Recommended
 
 ## Problem
 
-How to allow users to customize the web search and fetch tools used by agents?
+How to select and prioritize web research tools in a cost-effective and reliable way?
 
-In declarative MAS systems, agents typically rely on built-in tools like `WebSearch` and `WebFetch` for web research. However, there are compelling reasons why users might want to use alternative tools:
+In declarative MAS systems, agents need tools for web search and content fetching. Different tools have different trade-offs:
 
-1. **Enhanced Capabilities**: Custom tools may offer features unavailable in default tools
-   - Commercial services (e.g., Oxylabs, Bright Data) can bypass paywalls and anti-bot protections
-   - Specialized crawlers may handle dynamic JavaScript-rendered content better
-   - Some services provide cleaner content extraction or better handling of specific site types
+1. **AI Provider Default Tools** (e.g., `WebSearch`, `WebFetch`)
+   - Always available in the runtime
+   - But often more expensive (consume AI provider API quota)
+   - May have limitations on access to certain content
 
-2. **Cost Optimization**: Using custom tools can reduce API costs
-   - Default tools like `WebSearch` and `WebFetch` consume the AI provider's MCP quota
-   - Self-hosted or third-party tools can offload this consumption
-   - For high-volume research tasks, this can result in significant savings
+2. **MCP Tools** (e.g., crawl4ai, serper, oxylabs)
+   - Often free or cheaper than AI provider tools
+   - May offer enhanced capabilities (better content extraction, paywall bypass)
+   - But may not always be available or may fail for certain URLs
 
-3. **Compliance and Access**: Organizational requirements may mandate specific tools
-   - Corporate proxies or VPNs for accessing internal resources
-   - Region-specific search engines for localized content
-   - Tools with specific data retention or privacy policies
-
-The challenge is to provide this flexibility while maintaining a reliable fallback mechanism when custom tools fail.
+The challenge is to provide a sensible default that optimizes for cost and capability while ensuring reliability.
 
 ## Context
 
 This pattern applies when:
 
-- Users have access to custom search or fetch tools (via MCP servers or other mechanisms)
-- Cost optimization is a concern for high-volume research
-- Access to paywalled or protected content is needed
-- The runtime environment supports multiple tool options
+- Agents need to perform web research (search and fetch)
+- Cost optimization is desirable
+- Multiple tool options are available in the runtime
 
-This pattern may be skipped when:
-
-- Only default tools are available
-- The research scope is small and cost is not a concern
-- Content sources are all freely accessible
+This pattern should be applied by default for all systems that include web research capabilities.
 
 ## Forces
 
-- **Flexibility vs Complexity**: More tool options increase setup complexity
-- **Capability vs Reliability**: Custom tools may be more powerful but less reliable
-- **Cost vs Convenience**: Cheaper tools may require more configuration
-- **Consistency vs Optimization**: Different tools may return different formats
+- **Cost vs Reliability**: Cheaper tools may be less reliable
+- **Capability vs Availability**: Powerful tools may not always be available
+- **Simplicity vs Flexibility**: Default configuration should work for most cases, but allow overrides
 
 ## Solution
 
-**Allow users to declare custom tools for web search and fetch operations. Agents should attempt custom tools first, then fall back to default tools when custom tools fail or are unavailable.**
+**Provide a default tool priority list that prefers MCP tools (free/powerful) over AI provider default tools (expensive). Agent blueprints use conceptual terms ("search tool", "web fetch tool") while the tool priority is defined in one central location.**
 
-### User Input Configuration
+### Default Tool Priorities
 
-Users declare their custom tools in the user input:
+**Search Tools** (priority from high to low):
+1. `mcp__serper-search__google_search` - Google search via Serper API
+2. `WebSearch` - AI provider default (fallback)
 
-```markdown
-## Custom Tools Configuration
+**Web Fetch Tools** (priority from high to low):
+1. `mcp__crawl4ai__read_url` - Free, good for most pages
+2. `mcp__oxylabs__universal_scraper` - Powerful, handles difficult pages
+3. `mcp__oxylabs__ai_scraper` - AI-powered extraction
+4. `WebFetch` - AI provider default (fallback)
 
-**Custom Web Search Tool**: mcp__crawl4ai__search
-**Custom Web Fetch Tool**: mcp__crawl4ai__read_url
-**Fallback Strategy**: fallback_to_default
+### Tool Selection Strategy
+
 ```
-
-### Tool Priority Strategy
-
-```
-┌─────────────────────────────┐
-│  Need to search/fetch web   │
-└──────────────┬──────────────┘
+┌─────────────────────────────────┐
+│  Need to search/fetch web       │
+└──────────────┬──────────────────┘
                │
                ▼
-┌─────────────────────────────┐
-│  Custom tool configured?    │
-└──────────────┬──────────────┘
+┌─────────────────────────────────┐
+│  Try tools in priority order    │
+└──────────────┬──────────────────┘
+               │
+               ▼
+┌─────────────────────────────────┐
+│  Tool succeeded?                │
+└──────────────┬──────────────────┘
                │
         ┌──────┴──────┐
         │ Yes         │ No
         ▼             ▼
-┌───────────────┐  ┌───────────────┐
-│ Try custom    │  │ Use default   │
-│ tool first    │  │ tool          │
-└───────┬───────┘  └───────────────┘
-        │
-        ▼
-┌───────────────────┐
-│ Custom succeeded? │
-└────────┬──────────┘
-         │
-   ┌─────┴─────┐
-   │ Yes       │ No
-   ▼           ▼
-┌────────┐  ┌─────────────────────┐
-│ Done   │  │ Fallback strategy?  │
-└────────┘  └──────────┬──────────┘
-                       │
-            ┌──────────┴──────────┐
-            │ fallback_to_default │ custom_only
-            ▼                     ▼
-    ┌───────────────┐      ┌────────────┐
-    │ Try default   │      │ Report     │
-    │ tool          │      │ failure    │
-    └───────────────┘      └────────────┘
+┌────────────┐  ┌─────────────────┐
+│   Done     │  │ More tools in   │
+│            │  │ priority list?  │
+└────────────┘  └────────┬────────┘
+                         │
+                  ┌──────┴──────┐
+                  │ Yes         │ No
+                  ▼             ▼
+          ┌─────────────┐ ┌────────────┐
+          │ Try next    │ │ Report     │
+          │ tool        │ │ failure    │
+          └─────────────┘ └────────────┘
 ```
 
-### Fallback Strategies
+### Rationale for Default Priorities
 
-| Strategy | Behavior | Use Case |
-|----------|----------|----------|
-| `fallback_to_default` | Try custom tool first, use default if custom fails | Most common; balances capability with reliability |
-| `custom_only` | Use only custom tool, fail if unavailable | When default tools are inadequate or prohibited |
+**Why prefer MCP tools over AI provider defaults:**
+- AI provider tools (WebSearch, WebFetch) typically consume API quota and are more expensive
+- MCP tools like crawl4ai are free and often sufficient for most use cases
+
+**Why crawl4ai before oxylabs:**
+- crawl4ai is free and handles most standard web pages well
+- oxylabs is more powerful (handles JavaScript rendering, paywalls) but may have usage costs
+- Try the free option first, escalate to powerful option when needed
+
+**Why keep AI provider tools as final fallback:**
+- They are always available in the runtime
+- Ensures the system can still function even if all MCP tools fail
 
 ## Consequences
 
 ### Benefits
 
-- **Cost Control**: Users can reduce API costs by using self-hosted or cheaper tools
-- **Enhanced Access**: Paywalled or protected content becomes accessible
-- **Flexibility**: Different projects can use different tool configurations
-- **Graceful Degradation**: Fallback ensures research continues even when custom tools fail
-- **Transparency**: Tool choice is explicit in user input, not hidden in agent logic
+- **Cost Optimization**: Free/cheap tools are tried first
+- **Graceful Degradation**: Multiple fallbacks ensure reliability
+- **Simplicity**: Default configuration works without user intervention
+- **Consistency**: Tool priority is defined once, used everywhere
 
 ### Liabilities
 
-- **Setup Complexity**: Users must configure MCP servers or tool bindings
-- **Debugging Difficulty**: Failures may be harder to diagnose with multiple tool options
-- **Format Inconsistency**: Different tools may return content in different formats
-- **Maintenance Burden**: Custom tool availability must be monitored
+- **Slightly Slower**: May need multiple attempts if preferred tools fail
+- **MCP Dependency**: Optimal cost requires MCP tools to be configured
 
 ## Implementation Guidelines
 
-### Agent Blueprint Language
+### In Agent Blueprints
 
-When BHV-06 is enabled with custom tools, include this section in data collection agents:
-
-```markdown
-## Web Research Tools
-
-This system is configured with custom tools for web research.
-
-### Search Operations
-
-**Primary Tool**: `{custom_search_tool}`
-**Fallback Tool**: `WebSearch`
-**Fallback Strategy**: `{fallback_strategy}`
-
-When you need to search the web:
-1. First attempt using `{custom_search_tool}`
-2. If the custom tool fails (error, timeout, or unavailable), and fallback is enabled:
-   - Log the failure reason
-   - Retry using the default `WebSearch` tool
-3. If using `custom_only` strategy and custom tool fails:
-   - Record that this search could not be completed
-   - Continue with other available information
-
-### Fetch Operations
-
-**Primary Tool**: `{custom_fetch_tool}`
-**Fallback Tool**: `WebFetch`
-**Fallback Strategy**: `{fallback_strategy}`
-
-When you need to fetch web page content:
-1. First attempt using `{custom_fetch_tool}`
-2. If the custom tool fails and fallback is enabled:
-   - Log the failure reason
-   - Retry using the default `WebFetch` tool
-3. If using `custom_only` strategy and custom tool fails:
-   - Record that this URL could not be fetched
-   - Do not use information from this source (per BHV-05)
-
-### Logging Tool Usage
-
-When recording collected data, note which tool was used:
-- **Tool Used**: [custom tool name] or [default tool name] (fallback)
-```
-
-### Generator Handling
-
-The generator should:
-
-1. Check if custom tools are configured in user input
-2. If configured, include the tool priority section in relevant agent blueprints
-3. Ensure BHV-05 (Grounded Web Research) principles still apply regardless of tool choice
-
-### Example User Input
+Use conceptual terms, not specific tool names:
 
 ```markdown
-## Custom Tools Configuration
+## Web Research Method
 
-**Custom Web Search Tool**: mcp__crawl4ai__search
-**Custom Web Fetch Tool**: mcp__crawl4ai__read_url
-**Fallback Strategy**: fallback_to_default
+When collecting information from the web, use the **search tool** to find sources
+and the **web fetch tool** to retrieve content.
+
+For tool priorities, see the "Tool Priorities" section below.
 ```
 
-### Example Generated Blueprint Section
+### Tool Priorities Section (include once in each blueprint that does web research)
 
 ```markdown
-## Web Research Tools
+## Tool Priorities
 
-This system is configured with custom tools for web research.
+**Search Tools** (try in order):
+1. `mcp__serper-search__google_search`
+2. `WebSearch`
 
-### Search Operations
+**Web Fetch Tools** (try in order):
+1. `mcp__crawl4ai__read_url`
+2. `mcp__oxylabs__universal_scraper`
+3. `mcp__oxylabs__ai_scraper`
+4. `WebFetch`
 
-**Primary Tool**: `mcp__crawl4ai__search`
-**Fallback Tool**: `WebSearch`
-**Fallback Strategy**: `fallback_to_default`
-
-When you need to search the web:
-1. First attempt using `mcp__crawl4ai__search`
-2. If the tool returns an error or times out:
-   - Log: "Custom search failed: [reason], falling back to WebSearch"
-   - Retry using `WebSearch`
-
-### Fetch Operations
-
-**Primary Tool**: `mcp__crawl4ai__read_url`
-**Fallback Tool**: `WebFetch`
-**Fallback Strategy**: `fallback_to_default`
-
-When you need to fetch web page content:
-1. First attempt using `mcp__crawl4ai__read_url`
-2. If the tool returns an error or times out:
-   - Log: "Custom fetch failed: [reason], falling back to WebFetch"
-   - Retry using `WebFetch`
+When a tool fails (error, timeout, or returns empty), try the next tool in the list.
+Only report failure when all tools have been exhausted.
 ```
+
+### Advanced: User Overrides
+
+For advanced users who need to customize tool priorities, they can specify overrides in the user input:
+
+```markdown
+## Tool Priority Overrides (Advanced)
+
+**Search Tools**: [custom priority list, or "default"]
+**Web Fetch Tools**: [custom priority list, or "default"]
+```
+
+Most users should leave this section empty or omit it entirely to use the defaults.
 
 ## Examples
 
-### Scenario 1: Cost Optimization
+### Standard Usage (No Override)
 
-A research team needs to collect data from 500+ web sources. Using default `WebSearch` and `WebFetch` would consume significant API quota.
+User input does not specify tool overrides. The system uses default priorities.
 
-**Configuration**:
+Agent attempts to fetch a web page:
+1. Try `mcp__crawl4ai__read_url` → times out
+2. Try `mcp__oxylabs__universal_scraper` → succeeds
+3. Return content
+
+### Advanced: Override for Specific Needs
+
+A user needs to access paywalled content and wants to use oxylabs exclusively:
+
 ```markdown
-**Custom Web Search Tool**: mcp__crawl4ai__search
-**Custom Web Fetch Tool**: mcp__crawl4ai__read_url
-**Fallback Strategy**: fallback_to_default
+## Tool Priority Overrides (Advanced)
+
+**Search Tools**: default
+**Web Fetch Tools**: mcp__oxylabs__universal_scraper, mcp__oxylabs__ai_scraper
 ```
 
-**Result**: Most searches and fetches use the self-hosted Crawl4AI service, with occasional fallbacks to default tools when the service is overloaded.
-
-### Scenario 2: Accessing Paywalled Content
-
-A financial analyst needs to research articles from premium news sources.
-
-**Configuration**:
-```markdown
-**Custom Web Search Tool**: (leave blank - use default)
-**Custom Web Fetch Tool**: mcp__oxylabs__fetch_with_proxy
-**Fallback Strategy**: custom_only
-```
-
-**Result**: Search uses default `WebSearch`, but fetching uses the Oxylabs proxy service that can access paywalled content. No fallback, since default `WebFetch` cannot access these sources anyway.
-
-### Scenario 3: No Custom Tools
-
-User doesn't have custom tools configured.
-
-**Configuration**:
-```markdown
-**Custom Web Search Tool**: (blank)
-**Custom Web Fetch Tool**: (blank)
-```
-
-**Result**: System uses default `WebSearch` and `WebFetch` tools. No tool priority section is added to agent blueprints.
+The system will only use oxylabs tools for fetching, with no fallback to free tools.
 
 ## Related Patterns
 
 - **[Intelligent Runtime](./COR-02-intelligent-runtime.md)**: Provides the default WebSearch and WebFetch tools
-- **[Grounded Web Research](./BHV-05-grounded-web-research.md)**: The fetch-before-use principle applies regardless of which tools are used
-- **[Reference Data Configuration](./STR-01-reference-data-configuration.md)**: Tool configuration is part of the system's reference data
+- **[Grounded Web Research](./BHV-05-grounded-web-research.md)**: Defines how to use search and fetch tools correctly; this pattern defines which tools to use
 
 ## Checklist
 
 When implementing this pattern, confirm:
 
-- [ ] User input template includes custom tool configuration section?
-- [ ] Generator checks for custom tool configuration?
-- [ ] Agent blueprints include tool priority section when custom tools are configured?
-- [ ] Fallback strategy is clearly documented in blueprints?
-- [ ] BHV-05 principles are maintained regardless of tool choice?
-- [ ] Tool usage is logged in data collection records?
+- [ ] Agent blueprints use conceptual terms ("search tool", "web fetch tool")?
+- [ ] Tool priority list is included in each blueprint that does web research?
+- [ ] Priority list is not duplicated across multiple sections within the same blueprint?
+- [ ] Default priorities prefer free/MCP tools over AI provider defaults?
+- [ ] Fallback chain includes AI provider defaults as final option?
