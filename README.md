@@ -2,6 +2,8 @@
 
 **Pattern-Oriented Multi-Agent System Architecture**
 
+[ EN | [中文](./README.zh-cn.md) ]
+
 ## TL;DR
 
 ```bash
