@@ -112,6 +112,7 @@ Patterns are grouped by category, identified by a three-letter prefix:
 | QUA-01 | [Embedded Quality Standards](./QUA-01-embedded-quality-standards.md) | Recommended | Embed quality standards in Agent blueprints |
 | QUA-02 | [Layered Quality Assurance](./QUA-02-layered-quality-assurance.md) | Optional | Multi-layered quality assurance mechanism |
 | QUA-03 | [Verifiable Data Lineage](./QUA-03-verifiable-data-lineage.md) | Required | End-to-end verifiable data lineage to prevent AI hallucination |
+| QUA-04 | [Estimation Method Validation](./QUA-04-estimation-method-validation.md) | Recommended | Three-stage validation gate for quantitative estimates: method validity, anchor consistency, confidence tier labeling |
 
 ## Pattern Relationship Diagram
 
@@ -196,6 +197,8 @@ Patterns are grouped by category, identified by a three-letter prefix:
 
 ## Version History
 
+- **v0.13** (2026-03): Strengthened QUA-01 with Analytical Derivation Standards dimension (mechanism-before-conclusion requirement for directional conclusions)
+- **v0.12** (2026-03): Added QUA-04 Estimation Method Validation; extended STR-06 with fifth component (estimation-methods.md); added Quantitative Analysis Standards dimension to QUA-01
 - **v0.11** (2026-01): Replaced STR-07 with Reverse-Engineered Research Questions (practical alternative to the abstract conceptualization approach)
 - **v0.10** (2026-01): Upgraded STR-06 Methodological Guidance to Required (was Recommended); STR-01 and STR-06 are now a mandatory pair
 - **v0.9** (2026-01): Added BHV-06 Configurable Tool Binding for custom search/fetch tools with fallback

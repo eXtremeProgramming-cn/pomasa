@@ -34,7 +34,7 @@ This pattern applies in the following scenarios:
 
 **Externalize methodological guidance as independent configuration files, managed separately from domain knowledge. Methodology files should be specific enough to be executable, including explicit checklists.**
 
-### Four Components of Methodological Guidance
+### Five Components of Methodological Guidance
 
 ```
 Methodological Guidance:
@@ -55,6 +55,12 @@ Methodological Guidance:
 │   ├── Core Questions: Questions to answer at each analysis point
 │   ├── Analysis Process: Specific steps
 │   └── Results Format: Storage format for analysis results
+│
+├── Estimation Methods Guide (estimation-methods)
+│   ├── Acceptability Criteria: When estimation is permitted
+│   ├── Method Validity Checks: Logical premise validation before calculating
+│   ├── Anchor Consistency Check: Cross-checking against directly observed data
+│   └── Confidence Tier Classification: Labeling derived results by reliability
 │
 └── Output Template (output-template)
     ├── Document Structure: Chapter arrangement
@@ -163,7 +169,51 @@ Results for each analysis point should be stored in the following format:
 ...
 ```
 
-#### 4. Output Template (output-template.md)
+#### 4. Estimation Methods Guide (estimation-methods.md)
+
+```markdown
+# Estimation Methods Guide
+
+## When Estimation Is Permitted
+
+Estimation is only acceptable when ALL of the following conditions are met:
+- Direct data is not publicly available and cannot be obtained within project scope
+- The estimation is used to indicate trends or relative magnitude, NOT as a precise figure
+- The estimation method and its assumptions are explicitly documented
+- Decision-makers are informed that the output is an estimate, not a measured value
+
+## Method Validity Checks (complete BEFORE calculating)
+
+For any derived quantitative metric, answer the following before proceeding:
+
+- [ ] **Unit and scope alignment**: Does the numerator come from the same population as the denominator? (e.g., using a domestic market share percentage against a global export total is a scope mismatch)
+- [ ] **Causal validity**: Is there a theoretical basis for using metric A to derive metric B, or is it a coincidental correlation?
+- [ ] **Falsifiability**: Can this estimation method be disproved by a single counterexample? If yes, search for that counterexample first.
+- [ ] **Independence of inputs**: Are the inputs to the formula independent, or do they share common factors that would cause double-counting or cancellation?
+
+If any check fails, the method must be revised or abandoned. Do not proceed to calculation.
+
+## Anchor Consistency Check (complete BEFORE outputting conclusion)
+
+1. List all directly observed values available for this subject (financial filings, official registrations, verified third-party data)
+2. Compare the estimated result against each anchor value:
+   - Same order of magnitude → flag as plausible, proceed
+   - Differs by more than 3×: → flag as **suspicious**, document the discrepancy and reason
+   - Differs by more than 10×: → flag as **likely invalid**, do not present the estimate as a finding; instead, report the anchor data and note that estimation is not feasible
+3. When estimate conflicts with anchor data, anchor data always takes precedence.
+
+## Confidence Tier Classification (mandatory labeling on all quantitative outputs)
+
+| Tier | Label | Definition | Presentation Requirement |
+|------|-------|------------|--------------------------|
+| 🟢 Direct | Directly observed | From primary source (filing, official publication) | Can be cited as fact |
+| 🟡 Derived-1 | Single-step estimate | One inference from direct data | Must note method and assumption |
+| 🔴 Derived-N | Multi-step estimate | Two or more inference steps | Must add disclaimer; cannot be presented as a precise figure |
+
+The confidence of a multi-step derivation is bounded by the weakest step. If any step is 🔴, the final output is 🔴 regardless of other steps.
+```
+
+#### 5. Output Template (output-template.md)
 
 ```markdown
 # Output Template
@@ -262,6 +312,7 @@ references/
     ├── research-overview.md
     ├── data-sources.md
     ├── analysis-methods.md
+    ├── estimation-methods.md
     └── output-template.md
 ```
 
@@ -345,3 +396,4 @@ The following types of information sources should be **used cautiously** or **av
 - **[Embedded Quality Standards](./QUA-01-embedded-quality-standards.md)**: Quality checklists in methodology are specific implementations of quality standards
 - **[Composable Document Assembly](./STR-05-composable-document-assembly.md)**: Output templates provide format specifications for document assembly
 - **[Verifiable Data Lineage](./QUA-03-verifiable-data-lineage.md)**: Data sources guide supports data lineage tracing
+- **[Estimation Method Validation](./QUA-04-estimation-method-validation.md)**: The estimation-methods component of this pattern is governed by the QUA-04 pattern

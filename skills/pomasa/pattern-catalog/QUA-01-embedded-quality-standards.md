@@ -42,8 +42,14 @@ Standard Hierarchy:
 ├── Style Standards: Language style, expression norms
 │   └── Example: Use objective, neutral academic language
 │
-└── Quality Standards: Credibility, completeness, consistency
-    └── Example: Critical data requires cross-validation
+├── Quality Standards: Credibility, completeness, consistency
+│   └── Example: Critical data requires cross-validation
+│
+├── Quantitative Analysis Standards: Estimation validity and confidence labeling
+│   └── Example: All derived figures must be labeled with confidence tier
+│
+└── Analytical Derivation Standards: Mechanism-before-conclusion requirement
+    └── Example: Every directional prediction must state its key premise before the conclusion
 ```
 
 ### Embedding Standards in Blueprints
@@ -187,6 +193,34 @@ Before submitting output, confirm the following checklist items:
 - [ ] No obvious grammatical errors
 - [ ] Logic is coherent with no contradictions
 - [ ] Files written to correct location
+```
+
+**5. Quantitative Analysis Standards**
+```markdown
+### Quantitative Analysis Standards
+
+- [ ] Every quantitative conclusion is labeled with its confidence tier (🟢 Direct / 🟡 Derived-1 / 🔴 Derived-N)
+- [ ] Any derived figure documents the estimation method and key assumptions
+- [ ] Derived figures have been cross-checked against all available directly observed anchor data
+- [ ] Where estimated and observed values differ by more than 3×, the discrepancy is explicitly noted
+- [ ] Multi-step derived figures (🔴) carry a disclaimer and are not presented as precise values
+- [ ] Prohibited: expressing derived conclusions with the same certainty as directly observed data
+```
+
+**6. Analytical Derivation Standards**
+```markdown
+### Analytical Derivation Standards
+
+For any agent that produces directional predictions, strategic priorities, or investment recommendations:
+
+- [ ] Before stating a conclusion, explicitly state the key premise it depends on:
+      "This conclusion depends on [key premise]"
+- [ ] The key premise is supported by evidence in the workspace (cite specifically)
+- [ ] The conclusion is derived from the premise; it does not appear independently
+- [ ] Prohibited: stating a directional conclusion without completing the above steps
+- [ ] If the derivation chain cannot be completed, output:
+      "Insufficient basis for directional conclusion on [topic]"
+      rather than a directional claim
 ```
 
 ### Tiered Quality Standards
