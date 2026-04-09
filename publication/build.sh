@@ -12,8 +12,7 @@ OUTPUT_DIR="$SCRIPT_DIR/_output"
 PAPER_NAME="pomasa-paper"
 TIMESTAMP=$(date +"%Y%m%d-%H%M%S")
 
-# Clean and recreate output directory
-rm -rf "$OUTPUT_DIR"
+# Ensure output directory exists (keep previous builds)
 mkdir -p "$OUTPUT_DIR"
 
 # Output file paths
@@ -27,7 +26,7 @@ echo "Assembling markdown sections..."
 
 # Start with title and author
 cat > "$MD_OUTPUT" << 'EOF'
-# POMASA: A Pattern Language for AI-Executable Multi-Agent Systems
+# Pattern-Oriented Multi-Agent System Architecture: A Pattern Language for AI-Executable Multi-Agent Systems
 
 XIONG Jie, East China Normal University
 

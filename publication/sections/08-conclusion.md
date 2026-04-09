@@ -27,6 +27,8 @@ Several limitations constrain POMASA's current scope:
 
 **Cross-platform variability**: POMASA is distributed as a skill via skills.sh, a platform supporting over a dozen AI coding assistants including Claude Code, Cursor, Cline, Windsurf, and GitHub Copilot. The patterns are therefore portable in principle. However, different runtimes vary in tool naming conventions, subagent mechanisms, and capability levels. Some patterns (notably BHV-06: Configurable Tool Binding) remain runtime-specific, and cross-platform systems require attention to these implementation differences.
 
+**Security**: POMASA does not currently address security concerns such as protecting domain knowledge from exposure to cloud-based AI services, securing inter-agent communication, or preventing prompt injection attacks. Security in multi-agent systems is a substantial topic that warrants dedicated treatment. Organizations deploying POMASA-based systems in sensitive domains should conduct their own security assessment and apply appropriate safeguards.
+
 **Quality ceiling**: Output quality depends on underlying AI capabilities. POMASA provides structure and verification but cannot exceed what the AI runtime can produce. As AI capabilities evolve, achievable quality will increase.
 
 **Scaling limits**: The industry analysis system handles 55 parallel research tasks comfortably. Systems requiring thousands of concurrent agents may encounter coordination challenges the current patterns don't address.
@@ -73,9 +75,8 @@ This paper presents the foundational patterns and key insights of POMASA. Severa
 
 **Pattern language evolution**: As the pattern catalog continues to grow, documenting the evolution process itself—how patterns emerge, mature, and occasionally become obsolete—would contribute to the pattern community's understanding of living pattern languages.
 
-**Community applications and knowledge sharing**: Early adoption suggests that POMASA enables a wide variety of systems beyond its original research orientation. For example, a multi-agent news curation system[^noc] uses agent groups for news collection, investigative writing, and translation to produce a weekly multilingual newsletter. Such diverse applications demonstrate that the pattern language can inspire creative system designs across domains. Documenting and sharing what practitioners build with POMASA—the problems they solve, the patterns they combine, and the new patterns they discover—would be valuable for empowering a broader community of declarative MAS builders.
+**Community applications and knowledge sharing**: Early adoption suggests that POMASA enables a wide variety of systems beyond its original research orientation. For example, a multi-agent news curation system uses agent groups for news collection, investigative writing, and translation to produce a weekly multilingual newsletter. Such diverse applications demonstrate that the pattern language can inspire creative system designs across domains. Documenting and sharing what practitioners build with POMASA—the problems they solve, the patterns they combine, and the new patterns they discover—would be valuable for empowering a broader community of declarative MAS builders.
 
-[^noc]: https://thetricontinental.org/asia/publications/news-on-china/
 
 We envision this paper as the first in a series, establishing the core architecture and the executability insight. Subsequent work will explore specific pattern categories in greater depth and document the pattern language's application across diverse domains.
 

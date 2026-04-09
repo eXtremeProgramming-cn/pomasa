@@ -27,11 +27,17 @@
 
 [13] Liu, Y., Lo, S.K., Lu, Q., Zhu, L., Zhao, D., Xu, X., Harrer, S. and Whittle, J., 2024. Agent Design Pattern Catalogue: A Collection of Architectural Patterns for Foundation Model based Agents. *Journal of Systems and Software*, 220, 112278.
 
-[14] Corneli, J., Danoff, C.J., Puzio, R.S., Ayloo, S., Belich, S., Wilkinson, A., Tedeschi, M. and Mosley, P., 2025. Patterns for a New Generation: AI and Agents. *Proceedings of Pattern Languages of Programs 2025 (PLoP 2025)*.
+[14] Corneli, J., Danoff, C.J., Puzio, R.S., Ayloo, S., Belich, S., Wilkinson, A., Tedeschi, M. and Mosley, P., 2026. Patterns for a New Generation: AI and Agents. *arXiv preprint arXiv:2506.09696v3*.
 
 [15] Park, J.S., O'Brien, J.C., Cai, C.J., Morris, M.R., Liang, P. and Bernstein, M.S., 2023. Generative Agents: Interactive Simulacra of Human Behavior. *Proceedings of the 36th Annual ACM Symposium on User Interface Software and Technology (UIST '23)*. ACM.
 
 [16] Lewis, P., Perez, E., Piktus, A., Petroni, F., Karpukhin, V., Goyal, N., Kuttler, H., Lewis, M., Yih, W., Rocktaschel, T., Riedel, S. and Kiela, D., 2020. Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks. *Advances in Neural Information Processing Systems*, 33, pp. 9459-9474.
 
 [17] Huang, L., Yu, W., Ma, W., Zhong, W., Feng, Z., Wang, H., Chen, Q., Peng, W., Feng, X., Qin, B. and Liu, T., 2023. A Survey on Hallucination in Large Language Models: Principles, Taxonomy, Challenges, and Open Questions. *arXiv preprint arXiv:2311.05232*.
+
+[18] Cherny, B. and Wu, C., 2025. Claude Code: Anthropic's Agent in Your Terminal. *Latent Space Podcast*, May 7, 2025. Transcript available at https://www.latent.space/p/claude-code.
+
+[19] Li, Z., Liang, P., et al., 2025. Designing LLM-based Multi-Agent Systems for Software Engineering Tasks: Quality Attributes, Design Patterns and Rationale. *arXiv preprint arXiv:2511.08475*.
+
+[20] Yu, Y., 2026. From Goals to Aspects, Revisited: An NFR Pattern Language for Agentic AI Systems. *arXiv preprint arXiv:2603.00472*.
 
