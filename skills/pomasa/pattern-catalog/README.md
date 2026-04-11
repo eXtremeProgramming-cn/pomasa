@@ -104,6 +104,7 @@ Patterns are grouped by category, identified by a three-letter prefix:
 | BHV-04 | [Progressive Data Refinement](./BHV-04-progressive-data-refinement.md) | Optional | Data undergoes gradual refinement through multiple stages |
 | BHV-05 | [Grounded Web Research](./BHV-05-grounded-web-research.md) | Recommended | Fetch original content before using web information |
 | BHV-06 | [Configurable Tool Binding](./BHV-06-configurable-tool-binding.md) | Optional | Allow users to configure custom search and fetch tools with fallback |
+| BHV-07 | [Cumulative Project Library](./BHV-07-cumulative-project-library.md) | Recommended | Accumulate raw materials in a shared library across multiple runs |
 
 ### QUA - Quality Patterns
 
@@ -196,6 +197,7 @@ Patterns are grouped by category, identified by a three-letter prefix:
 
 ## Version History
 
+- **v0.12** (2026-04): Added BHV-07 Cumulative Project Library for accumulating raw materials across multiple MAS runs
 - **v0.11** (2026-01): Replaced STR-07 with Reverse-Engineered Research Questions (practical alternative to the abstract conceptualization approach)
 - **v0.10** (2026-01): Upgraded STR-06 Methodological Guidance to Required (was Recommended); STR-01 and STR-06 are now a mandatory pair
 - **v0.9** (2026-01): Added BHV-06 Configurable Tool Binding for custom search/fetch tools with fallback
