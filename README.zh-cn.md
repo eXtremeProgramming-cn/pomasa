@@ -42,7 +42,7 @@ POMASA 采用"模式语言 + 生成器"的方法：
 
 ### 架构概览
 
-![POMASA 架构](./pomasa-explained.png)
+![POMASA 架构](./pomasa-explained-v2.png)
 
 POMASA 模式分为四个类别（如左侧所示），管理三个架构层：
 
