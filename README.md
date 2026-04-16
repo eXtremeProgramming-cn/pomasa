@@ -42,7 +42,7 @@ POMASA adopts a "pattern language + generator" approach:
 
 ### Architecture Overview
 
-![POMASA Architecture](./pomasa-explained-v2.png)
+![POMASA Architecture](./pomasa-explained-v2.1.jpg)
 
 POMASA patterns are organized into four categories (shown on the left), governing three architectural layers:
 
