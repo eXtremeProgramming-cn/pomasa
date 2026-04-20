@@ -78,15 +78,18 @@ my-mas/
 │   └── 05.report/
 │       └── final_report.md      # Source for export
 ├── scripts/
-│   ├── export.sh                # Export script
+│   ├── export.sh                # Export script (supports --lang cn|en)
 │   ├── docx-template.docx       # DOCX format template
-│   └── latex-header.tex         # PDF format control
+│   ├── latex-header.tex         # PDF format (Chinese, default)
+│   └── latex-header-en.tex      # PDF format (English, block-style)
 └── _output/                     # Deliverables (may be gitignored)
     ├── Report Title [20260101-093510].docx
     └── Report Title [20260101-093510].pdf
 ```
 
 ### Export Script Example
+
+The export script supports a `--lang cn|en` parameter to select the appropriate LaTeX header. The default is `cn` (Chinese, with first-line indentation). Use `--lang en` for English documents (block-style paragraphs, no indent).
 
 ```bash
 #!/bin/bash
@@ -98,8 +101,25 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PROJECT_ROOT="$(dirname "$SCRIPT_DIR")"
 OUTPUT_DIR="${PROJECT_ROOT}/_output"
 
-# Input file (default or from argument)
-INPUT_FILE="${1:-${PROJECT_ROOT}/workspace/05.report/final_report.md}"
+# Parse arguments
+LANG="cn"
+INPUT_FILE=""
+
+while [[ $# -gt 0 ]]; do
+    case $1 in
+        --lang)
+            LANG="$2"
+            shift 2
+            ;;
+        *)
+            INPUT_FILE="$1"
+            shift
+            ;;
+    esac
+done
+
+# Default input file
+INPUT_FILE="${INPUT_FILE:-${PROJECT_ROOT}/workspace/05.report/final_report.md}"
 
 if [ ! -f "$INPUT_FILE" ]; then
     echo "Error: Input file not found: $INPUT_FILE"
@@ -109,7 +129,7 @@ fi
 # Extract title from first heading
 TITLE=$(grep -m 1 '^# ' "$INPUT_FILE" | sed 's/^# //')
 if [ -z "$TITLE" ]; then
-    echo "Error: No title found (expected '# Title' on first line)"
+    echo "Error: No title found (expected '# Title' on first content line)"
     exit 1
 fi
 
@@ -125,7 +145,15 @@ mkdir -p "$OUTPUT_DIR"
 
 # Template files
 DOCX_TEMPLATE="${SCRIPT_DIR}/docx-template.docx"
+
+# Select LaTeX header by language
 LATEX_HEADER="${SCRIPT_DIR}/latex-header.tex"
+if [ "$LANG" = "en" ]; then
+    LATEX_HEADER="${SCRIPT_DIR}/latex-header-en.tex"
+    echo "Using English PDF template (block paragraphs, no indent)"
+else
+    echo "Using Chinese PDF template (first-line indentation)"
+fi
 
 # Export to DOCX
 echo "Exporting to DOCX..."
@@ -172,40 +200,71 @@ To create a template:
 
 ### LaTeX Header for PDF
 
-The `latex-header.tex` file controls PDF formatting, especially for multi-language support:
+The export pipeline provides **language-specific LaTeX headers** to handle the different typographic conventions of Chinese and English documents:
+
+#### Chinese Documents (`latex-header.tex`, default)
+
+Chinese documents use first-line paragraph indentation (首行缩进), centered section/subsection headings, and `indentfirst` to ensure even the first paragraph after a heading is indented.
 
 ```latex
-% Font configuration for CJK support
-\usepackage{fontspec}
-\usepackage{xeCJK}
-
-% Set fonts (adjust based on available fonts)
-\setmainfont{Cochin}
-\setCJKmainfont{Songti SC}
-
-% Page layout
-\usepackage{geometry}
-\geometry{a4paper, margin=2.5cm}
-
-% Line spacing
-\usepackage{setspace}
-\onehalfspacing
-
-% Paragraph formatting
+% 段落格式 — 中文：首行缩进两个字
+\usepackage{indentfirst}
 \setlength{\parindent}{2em}
-\setlength{\parskip}{0.5em}
+\setlength{\parskip}{0pt}
+
+% 标题格式 — 各级标题明显大于正文，居中
+\usepackage{titlesec}
+\titleformat{\section}{\LARGE\bfseries\centering}{\thesection}{1em}{}
+\titleformat{\subsection}{\Large\bfseries\centering}{\thesubsection}{1em}{}
+\titleformat{\subsubsection}{\large\bfseries}{\thesubsubsection}{1em}{}
 ```
+
+#### English Documents (`latex-header-en.tex`)
+
+English documents use block-style paragraphs (no indent, spacing between paragraphs), left-aligned headings, and larger font sizes for clear visual hierarchy.
+
+```latex
+% Paragraph formatting — English: block-style, no indent
+\setlength{\parindent}{0em}
+\setlength{\parskip}{0.5em}
+
+% Title formatting — larger than body text
+\usepackage{titlesec}
+\titleformat{\section}{\LARGE\bfseries}{\thesection}{1em}{}[\vspace{0.3em}]
+\titleformat{\subsection}{\Large\bfseries}{\thesubsection}{1em}{}
+\titleformat{\subsubsection}{\large\bfseries}{\thesubsubsection}{1em}{}
+```
+
+Both headers include CJK font support (`xeCJK`) so that Chinese terms within English documents render correctly.
+
+#### Font Size Hierarchy
+
+Both templates define a clear visual hierarchy using `titlesec`:
+
+| Heading Level | LaTeX Command | Font Size |
+|--------------|---------------|-----------|
+| Section (##) | `\section` | `\LARGE` (~17pt) |
+| Subsection (###) | `\subsection` | `\Large` (~14pt) |
+| Sub-subsection (####) | `\subsubsection` | `\large` (~12pt) |
+| Body text | — | `\normalsize` (~10pt) |
+
+This ensures all heading levels are visually distinct from body text. The third-level heading (`\subsubsection`) has its own line with proper spacing above and below via `\titlespacing*`.
 
 ### Usage
 
-Basic usage (uses default input path):
+Basic usage (Chinese document, default):
 ```bash
 ./scripts/export.sh
 ```
 
+English document:
+```bash
+./scripts/export.sh --lang en
+```
+
 With explicit input file:
 ```bash
-./scripts/export.sh workspace/05.report/final_report.md
+./scripts/export.sh --lang en workspace/05.report/final_report.md
 ```
 
 ## Examples
@@ -226,7 +285,8 @@ industry-assessment/
 ├── scripts/
 │   ├── export.sh
 │   ├── docx-template.docx
-│   └── latex-header.tex
+│   ├── latex-header.tex
+│   └── latex-header-en.tex
 └── _output/
     ├── Industry Assessment Report [20260101-093510].docx
     └── Industry Assessment Report [20260101-093510].pdf

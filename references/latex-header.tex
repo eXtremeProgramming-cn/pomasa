@@ -1,19 +1,44 @@
-% PDF 导出 LaTeX 头部设置
+% PDF 导出 LaTeX 头部设置 — 默认模板（中文文档）
+% 英文文档请使用 latex-header-en.tex
 
-% 首段缩进
+% 字体配置
+\usepackage{fontspec}
+\usepackage{xeCJK}
+
+% 设置字体（根据系统可用字体调整）
+\setmainfont{Times New Roman}
+\setCJKmainfont{Songti SC}
+
+% 页面布局
+\usepackage{geometry}
+\geometry{a4paper, margin=2.5cm}
+
+% 行距
+\usepackage{setspace}
+\onehalfspacing
+
+% 段落格式 — 中文：首行缩进两个字
 \usepackage{indentfirst}
+\setlength{\parindent}{2em}
+\setlength{\parskip}{0pt}
 
-% 标题格式
+% 标题格式 — 各级标题明显大于正文，居中
 \usepackage{titlesec}
-% 一级标题（section）：居中
-\titleformat{\section}{\centering\Large\bfseries}{\thesection}{1em}{}
-% 二级标题（subsection）：居中
-\titleformat{\subsection}{\centering\large\bfseries}{\thesubsection}{1em}{}
-% 三级标题（subsubsection）：缩进两个字
-\titleformat{\subsubsection}{\normalsize\bfseries}{\thesubsubsection}{0pt}{\hspace{2em}}
+\titleformat{\section}{\LARGE\bfseries\centering}{\thesection}{1em}{}
+\titleformat{\subsection}{\Large\bfseries\centering}{\thesubsection}{1em}{}
+\titleformat{\subsubsection}{\large\bfseries}{\thesubsubsection}{1em}{}
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.6em}
+\titlespacing*{\subsubsection}{0pt}{1em}{0.4em}
 
 % 脚注与正文间距
 \setlength{\skip\footins}{1.5em}
 
-% 段落首行缩进两个字
-\setlength{\parindent}{2em}
+% 超链接
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue!60!black,
+    citecolor=blue!60!black,
+    urlcolor=blue!70!black
+}

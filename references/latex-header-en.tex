@@ -1,0 +1,40 @@
+% PDF export LaTeX header — English documents
+% For Chinese documents, use latex-header.tex (default) instead
+
+% Font configuration
+\usepackage{fontspec}
+\usepackage{xeCJK}
+
+% Set fonts (adjust based on available fonts on your system)
+\setmainfont{Times New Roman}
+\setCJKmainfont{Songti SC}
+
+% Page layout
+\usepackage{geometry}
+\geometry{a4paper, margin=2.5cm}
+
+% Line spacing
+\usepackage{setspace}
+\onehalfspacing
+
+% Paragraph formatting — English: block-style paragraphs, no first-line indent
+\setlength{\parindent}{0em}
+\setlength{\parskip}{0.5em}
+
+% Title formatting — make headings clearly larger than body text
+\usepackage{titlesec}
+\titleformat{\section}{\LARGE\bfseries}{\thesection}{1em}{}[\vspace{0.3em}]
+\titleformat{\subsection}{\Large\bfseries}{\thesubsection}{1em}{}
+\titleformat{\subsubsection}{\large\bfseries}{\thesubsubsection}{1em}{}
+\titlespacing*{\section}{0pt}{1.5em}{0.8em}
+\titlespacing*{\subsection}{0pt}{1.2em}{0.6em}
+\titlespacing*{\subsubsection}{0pt}{1em}{0.4em}
+
+% Hyperlinks
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue!60!black,
+    citecolor=blue!60!black,
+    urlcolor=blue!70!black
+}
