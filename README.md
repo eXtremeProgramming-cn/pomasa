@@ -7,7 +7,7 @@
 ## TL;DR
 
 ```bash
-npx add-skill eXtremeProgramming-cn/pomasa
+npx skills add eXtremeProgramming-cn/pomasa
 ```
 
 Then just tell your AI client (e.g. Claude Code or Codex):
