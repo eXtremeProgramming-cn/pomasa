@@ -34,13 +34,13 @@ This pattern applies to the following scenarios:
   "dimensions": ["country"],
   "units": null,
   "units_index": "units.json",
-  "unit_layout": "{country}"
+  "unit_layout": "workspace/{country}"
 }
 ```
 
 Field meanings:
 
-- `mode`: `single` (the whole MAS is one unit; unit root is the MAS directory itself) or `multi`
+- `mode`: `single` (the whole MAS is one unit; unit root is `workspace/`) or `multi`
 - `dimensions`: physical meaning of the unit key, e.g. `["country"]`, `["date"]`. Multiple dimensions nest: `["country", "year"]` maps to `workspace/{country}/{year}/`
 - `units`: pre-declared unit keys, or `null` when units are enumerated at run time
 - `units_index`: file, relative to the MAS root, where a runtime enumeration phase writes discovered units
@@ -60,10 +60,12 @@ The minimal form of `single` mode:
 ├── agents/
 ├── references/
 ├── units.json          # optional: run-time enumeration result
-└── <unit-key>/        # multi mode: one root per unit
-│   ├── run.json        # see OBV-03
-│   └── NN.<stage>/
-(stage dirs directly)      # single mode: the MAS directory is the unit root
+└── workspace/
+    ├── <unit-key>/     # multi mode: one root per unit
+    │   ├── run.json    # see OBV-03
+    │   ├── NN.<stage>/
+    │   └── ...
+    └── (stage dirs)    # single mode: workspace is the unit root
 ```
 
 ### Unit enumeration
@@ -94,7 +96,7 @@ The minimal form of `single` mode:
 ## Examples
 
 - **Country index**: multi, dimensions ["country"], units enumerated by stage 1; UI shows "112 enumerated, 34 run".
-- **News digest**: multi, dimensions ["date"], no pre-declared units; "run new issue" creates `{2026-08-28}/` under the MAS directory.
+- **News digest**: multi, dimensions ["date"], no pre-declared units; "run new issue" creates `workspace/2026-08-28/`.
 - **Research report**: single; the whole MAS is one unit and one run.
 
 ## Related Patterns
