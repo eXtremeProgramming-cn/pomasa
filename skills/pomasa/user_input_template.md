@@ -77,6 +77,24 @@ List your reference materials below (file paths or URLs). The Generator will con
 If DOCX/PDF are selected, the Generator will set up an export pipeline with templates (STR-09).
 If Wiki is selected, the Generator will create a wiki-integrator agent and `wiki/` directory structure (BHV-08).
 
+## Run Unit Planning
+
+**How is work divided into runs?**
+
+- [ ] Run once as a whole system (single unit)
+- [ ] Split into units, each executed separately (e.g., one unit per country, per commodity, per date)
+
+If split, describe the unit dimensions:
+
+[Fill in: what does each unit represent? e.g., one unit per country, per data date]
+
+**Initial Unit List** (if known ahead):
+
+- [unit key]
+- ...
+
+If left blank, the Generator will choose a sensible default (single mode unless repetition is implied) or design a runtime enumeration mechanism.
+
 ---
 
 ## Pattern Selection

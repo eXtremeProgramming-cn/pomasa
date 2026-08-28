@@ -63,6 +63,7 @@ Patterns are grouped by category, identified by a three-letter prefix:
 | **STR** | Structure | Patterns that organize the static structure of systems |
 | **BHV** | Behavior | Patterns that define dynamic system behavior |
 | **QUA** | Quality | Patterns that ensure system quality |
+| **OBV** | Observability | Patterns that make MAS output and run progress uniformly observable and presentable |
 
 ### Necessity Levels
 
@@ -114,6 +115,14 @@ Patterns are grouped by category, identified by a three-letter prefix:
 | QUA-01 | [Embedded Quality Standards](./QUA-01-embedded-quality-standards.md) | Recommended | Embed quality standards in Agent blueprints |
 | QUA-02 | [Layered Quality Assurance](./QUA-02-layered-quality-assurance.md) | Optional | Multi-layered quality assurance mechanism |
 | QUA-03 | [Verifiable Data Lineage](./QUA-03-verifiable-data-lineage.md) | Required | End-to-end verifiable data lineage to prevent AI hallucination |
+
+### OBV - Observability Patterns
+
+| ID | Pattern | Necessity | Description |
+|----|---------|-----------|-------------|
+| OBV-01 | [Observable Artifact Contract](./OBV-01-observable-artifact-contract.md) | Required | Stages declare artifact contracts and maintain per-stage indexes of actual outputs |
+| OBV-02 | [Work Unit Decomposition](./OBV-02-work-unit-decomposition.md) | Required | Declare how runs are divided into units (single vs multi, dimensions, enumeration) |
+| OBV-03 | [Run Manifest](./OBV-03-run-manifest.md) | Required | Per-unit run.json state machine maintained by the orchestrator |
 
 ## Pattern Relationship Diagram
 
@@ -185,6 +194,8 @@ Patterns are grouped by category, identified by a three-letter prefix:
      library/ feeds wiki/    wiki/ compounds
 ```
 
+OBV-01/02/03 make the STR-02 filesystem data bus observable: OBV-01 declares what each stage produces, OBV-02 declares how runs are decomposed into units, OBV-03 records each unit's stage-level progress. They let any runtime UI render a MAS uniformly, and make QUA-03 lineage machine-readable. BHV-03 (parallel instance execution) is the batch form of a multi-unit OBV-02 decomposition.
+
 ## How to Use This Catalog
 
 ### Building New Systems
@@ -194,6 +205,7 @@ Patterns are grouped by category, identified by a three-letter prefix:
    - STR-01, STR-06 (Structure)
    - BHV-02 (Behavior)
    - QUA-03 (Quality)
+   - OBV-01, OBV-02, OBV-03 (Observability)
 2. **Evaluate Recommended Patterns**: Assess whether each "Recommended" pattern applies based on system requirements
 3. **Select Optional Patterns**: Choose appropriate "Optional" patterns based on specific scenarios
 4. **Combined Application**: Refer to the pattern relationship diagram to ensure related patterns work together
@@ -206,6 +218,7 @@ Patterns are grouped by category, identified by a three-letter prefix:
 
 ## Version History
 
+- **v0.14** (2026-08): Added OBV observability category with OBV-01 Observable Artifact Contract (artifact contracts + stage indexes), OBV-02 Work Unit Decomposition (declared run-axis: single/multi, dimensions, enumeration), OBV-03 Run Manifest (per-unit run.json state machine). All required; generated systems now carry pomasa.json and are uniformly renderable by runtime UIs.
 - **v0.13** (2026-04): Added BHV-08 Wiki Integration for transforming research output into a persistent Obsidian knowledge graph with typed links
 - **v0.12** (2026-04): Added BHV-07 Cumulative Project Library for accumulating raw materials across multiple MAS runs
 - **v0.11** (2026-01): Replaced STR-07 with Reverse-Engineered Research Questions (practical alternative to the abstract conceptualization approach)
