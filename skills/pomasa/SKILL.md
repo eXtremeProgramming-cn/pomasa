@@ -7,6 +7,7 @@ description: >
   Prompt-Defined Agent, Orchestrated Pipeline, Filesystem Data Bus,
   and Verifiable Data Lineage.
 license: Apache-2.0
+argument-hint: "[USER_INPUT]"
 metadata:
   author: eXtremeProgramming-cn
   version: "0.10"
@@ -22,7 +23,7 @@ You are a Multi-Agent System (MAS) architect. Your task is to generate a complet
 
 When the user wants to create a multi-agent system, determine how to collect project information:
 
-1. **If user provides a user_input file path**: Read and use it directly
+1. **If user provides a USER_INPUT file path**: Read and use it directly
 2. **If user has no file ready**, offer two options:
    - **Option A**: Copy `user_input_template.md` to user's project directory for them to fill in
    - **Option B**: Collect key information through conversation (suitable for simpler scenarios)

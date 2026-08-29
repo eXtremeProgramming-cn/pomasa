@@ -7,16 +7,16 @@
 ## 极简使用教程
 
 ```bash
-npx add-skill eXtremeProgramming-cn/pomasa
+npx skills add eXtremeProgramming-cn/pomasa
 ```
 
-然后只需告诉你的 AI 客户端（例如 Claude Code 或 Codex）:
+然后只需告诉你的 AI 客户端（例如 Claude Code 或 Codex 或 OpenClaw）:
 
 ```
-帮我创建一个用于分析医疗保健领域 AI 趋势的多智能体研究系统。
+帮我创建一个用于分析医疗保健领域 AI 趋势的多智能体研究系统。我的需求是...
 ```
 
-就这样。智能体会引导你完成其余步骤。
+就这样。AI 会引导你完成其余步骤，包括如何使用新生成的智能体。
 
 ## 目的
 
@@ -42,7 +42,7 @@ POMASA 采用"模式语言 + 生成器"的方法：
 
 ### 架构概览
 
-![POMASA 架构](./pomasa-explained-v2.1.jpg)
+![POMASA 架构](./pomasa-explained-zh-cn-v2.1.jpg)
 
 POMASA 模式分为四个类别（如左侧所示），管理三个架构层：
 
@@ -84,13 +84,13 @@ pomasa/
 为 Claude Code、Cursor、Cline 和其他兼容智能体安装 POMASA 作为智能体技能：
 
 ```bash
-npx add-skill eXtremeProgramming-cn/pomasa
+npx skills add eXtremeProgramming-cn/pomasa
 ```
 
 安装后，只需告诉智能体你想要什么：
 
 ```
-帮我创建一个用于分析医疗保健领域 AI 趋势的多智能体研究系统。
+/pomasa 帮我创建一个用于分析医疗保健领域 AI 趋势的多智能体研究系统。我的需求是...
 ```
 
 智能体将自动激活 POMASA 技能并引导你完成流程。
