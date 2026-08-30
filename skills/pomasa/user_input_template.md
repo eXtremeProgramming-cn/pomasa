@@ -82,13 +82,13 @@ If Wiki is selected, the Generator will create a wiki-integrator agent and `wiki
 **How is work divided into runs?**
 
 - [ ] Run once as a whole system (single unit)
-- [ ] Split into units, each executed separately (e.g., one unit per country, per commodity, per date)
+- [ ] Run the MAS separately for each research object, each run isolated from the others (e.g., one run per country, per commodity, per date)
 
-If split, describe the unit dimensions:
+If multi-run, describe the research-object dimension:
 
-[Fill in: what does each unit represent? e.g., one unit per country, per data date]
+[Fill in: what does each run represent? e.g., one run per country, one run per data date]
 
-**Initial Unit List** (if known ahead):
+**Initial Research Objects** (if known ahead):
 
 - [unit key]
 - ...

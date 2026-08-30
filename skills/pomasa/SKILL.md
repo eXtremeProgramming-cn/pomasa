@@ -58,7 +58,7 @@ The user should provide the following information (via file or conversation):
 - **Existing Materials**: Available reference materials
 - **Analysis Methods**: What methods to use for analysis (can be suggested by AI)
 - **Output Format**: What form the final report should take
-- **Run Unit Planning**: Run once as a whole, or split into units (by country, by date, ...) and which units. See OBV-02. Can be suggested by AI (default: single unless repetition is implied)
+- **Run Unit Planning**: Run once as a whole, or as separate isolated runs, each for one research object (by country, by date, ...). See OBV-02. Can be suggested by AI (default: single unless repetition is implied)
 - **Custom Tools**: Custom MCP tools for web search and fetch (optional)
 - **Other Requirements**: Special constraints or expectations
 
@@ -87,7 +87,7 @@ Based on user requirements, determine which patterns to adopt:
 | BHV-02 | Faithful Agent Instantiation | **How Orchestrator invokes other Agents (critical!)** |
 | QUA-03 | Verifiable Data Lineage | Data traceability requirements |
 | OBV-01 | Observable Artifact Contract | Artifact declarations, four shapes, stage index.json |
-| OBV-02 | Work Unit Decomposition | work section in pomasa.json, single/multi modes, unit enumeration |
+| OBV-02 | Work Unit Declaration | work section in pomasa.json, single/multi modes, unit enumeration |
 | OBV-03 | Run Manifest | run.json schema and orchestrator maintenance protocol |
 
 **Special Emphasis on BHV-02**: This pattern defines the standard format for how the Orchestrator invokes subagents:

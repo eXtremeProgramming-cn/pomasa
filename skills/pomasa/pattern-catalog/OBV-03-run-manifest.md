@@ -91,7 +91,7 @@ A three-stage research run: stage 1 completes, stage 2 goes active. The UI rende
 ## Related Patterns
 
 - [Observable Artifact Contract (OBV-01)](./OBV-01-observable-artifact-contract.md): artifact instances live in stage indexes
-- [Work Unit Decomposition (OBV-02)](./OBV-02-work-unit-decomposition.md): every unit root has one run.json
+- [Work Unit Declaration (OBV-02)](./OBV-02-work-unit-declaration.md): every unit root has one run.json
 - [Intelligent Runtime (COR-02)](./COR-02-intelligent-runtime.md): the orchestrator interprets the maintenance protocol
 - [Verifiable Data Lineage (QUA-03)](./QUA-03-verifiable-data-lineage.md): run timestamps support lineage
 

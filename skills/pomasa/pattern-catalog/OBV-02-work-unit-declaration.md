@@ -1,4 +1,4 @@
-# Work Unit Decomposition
+# Work Unit Declaration
 
 **Category**: Observability
 **Necessity**: Required
@@ -89,7 +89,7 @@ The minimal form of `single` mode:
 ## Implementation Guidelines
 
 - The generator writes `pomasa.json` in the same pass as the blueprints. Blueprint Artifact declarations (OBV-01) are the authoritative source; the descriptor aggregates them. Recompute the descriptor whenever blueprints change.
-- At generation time ask: run once as a whole, or split into units (by country, by date, ...) and which units; default to single unless the problem implies repetition
+- At generation time ask: run once as a whole, or separate isolated runs each for one research object (by country, by date, ...); default to single unless the problem implies repetition
 - Give units meaningful keys, preferring the axis value itself over generated ids
 - For date axes, the natural new-run key is "today" unless a specific period is given
 

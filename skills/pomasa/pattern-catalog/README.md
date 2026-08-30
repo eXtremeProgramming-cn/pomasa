@@ -121,7 +121,7 @@ Patterns are grouped by category, identified by a three-letter prefix:
 | ID | Pattern | Necessity | Description |
 |----|---------|-----------|-------------|
 | OBV-01 | [Observable Artifact Contract](./OBV-01-observable-artifact-contract.md) | Required | Stages declare artifact contracts and maintain per-stage indexes of actual outputs |
-| OBV-02 | [Work Unit Decomposition](./OBV-02-work-unit-decomposition.md) | Required | Declare how runs are divided into units (single vs multi, dimensions, enumeration) |
+| OBV-02 | [Work Unit Declaration](./OBV-02-work-unit-declaration.md) | Required | Declare the run axis and per-run work units (single vs multi, dimensions, enumeration) |
 | OBV-03 | [Run Manifest](./OBV-03-run-manifest.md) | Required | Per-unit run.json state machine maintained by the orchestrator |
 
 ## Pattern Relationship Diagram
@@ -194,7 +194,7 @@ Patterns are grouped by category, identified by a three-letter prefix:
      library/ feeds wiki/    wiki/ compounds
 ```
 
-OBV-01/02/03 make the STR-02 filesystem data bus observable: OBV-01 declares what each stage produces, OBV-02 declares how runs are decomposed into units, OBV-03 records each unit's stage-level progress. They let any runtime UI render a MAS uniformly, and make QUA-03 lineage machine-readable. BHV-03 (parallel instance execution) is the batch form of a multi-unit OBV-02 decomposition.
+OBV-01/02/03 make the STR-02 filesystem data bus observable: OBV-01 declares what each stage produces, OBV-02 declares the run axis and its work units, OBV-03 records each unit's stage-level progress. They let any runtime UI render a MAS uniformly, and make QUA-03 lineage machine-readable. BHV-03 (parallel instance execution) is the batch form of multi-unit OBV-02 runs.
 
 ## How to Use This Catalog
 
@@ -218,7 +218,7 @@ OBV-01/02/03 make the STR-02 filesystem data bus observable: OBV-01 declares wha
 
 ## Version History
 
-- **v0.14** (2026-08): Added OBV observability category with OBV-01 Observable Artifact Contract (artifact contracts + stage indexes), OBV-02 Work Unit Decomposition (declared run-axis: single/multi, dimensions, enumeration), OBV-03 Run Manifest (per-unit run.json state machine). All required; generated systems now carry pomasa.json and are uniformly renderable by runtime UIs.
+- **v0.14** (2026-08): Added OBV observability category with OBV-01 Observable Artifact Contract (artifact contracts + stage indexes), OBV-02 Work Unit Declaration (declared run-axis: single/multi, dimensions, enumeration), OBV-03 Run Manifest (per-unit run.json state machine). All required; generated systems now carry pomasa.json and are uniformly renderable by runtime UIs.
 - **v0.13** (2026-04): Added BHV-08 Wiki Integration for transforming research output into a persistent Obsidian knowledge graph with typed links
 - **v0.12** (2026-04): Added BHV-07 Cumulative Project Library for accumulating raw materials across multiple MAS runs
 - **v0.11** (2026-01): Replaced STR-07 with Reverse-Engineered Research Questions (practical alternative to the abstract conceptualization approach)

@@ -52,7 +52,7 @@ Fields:
 - `Artifact`: contract id, unique within the MAS
 - `Shape`: one of the four shapes below
 - `Format`: dominant file format of the artifacts
-- `PathGlob` / `IndexPath`: relative to the unit root (see [OBV-02](./OBV-02-work-unit-decomposition.md))
+- `PathGlob` / `IndexPath`: relative to the unit root (see [OBV-02](./OBV-02-work-unit-declaration.md))
 - `Schema`: entry fields the index is expected to carry
 
 The generator aggregates all contracts into the MAS descriptor `pomasa.json` under `stages[].contracts[]` (full descriptor schema in OBV-02).
@@ -122,7 +122,7 @@ A deep-research stage writes one findings summary per dimension and an index lis
 
 - [Filesystem Data Bus (STR-02)](./STR-02-filesystem-data-bus.md): the data bus OBV-01 observes
 - [Verifiable Data Lineage (QUA-03)](./QUA-03-verifiable-data-lineage.md): lineage becomes machine-readable through contracts
-- [Work Unit Decomposition (OBV-02)](./OBV-02-work-unit-decomposition.md): contract paths are relative to the unit root
+- [Work Unit Declaration (OBV-02)](./OBV-02-work-unit-declaration.md): contract paths are relative to the unit root
 - [Run Manifest (OBV-03)](./OBV-03-run-manifest.md): index entries feed the run view
 
 ## Checklist
