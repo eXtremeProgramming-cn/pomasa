@@ -77,6 +77,24 @@ List your reference materials below (file paths or URLs). The Generator will con
 If DOCX/PDF are selected, the Generator will set up an export pipeline with templates (STR-09).
 If Wiki is selected, the Generator will create a wiki-integrator agent and `wiki/` directory structure (BHV-08).
 
+## Run Unit Planning
+
+**How is work divided into runs?**
+
+- [ ] Run once as a whole system (single unit)
+- [ ] Run the MAS separately for each research object, each run isolated from the others (e.g., one run per country, per commodity, per date)
+
+If multi-run, describe the research-object dimension:
+
+[Fill in: what does each run represent? e.g., one run per country, one run per data date]
+
+**Initial Research Objects** (if known ahead):
+
+- [unit key]
+- ...
+
+If left blank, the Generator will choose a sensible default (single mode unless repetition is implied) or design a runtime enumeration mechanism.
+
 ---
 
 ## Pattern Selection
