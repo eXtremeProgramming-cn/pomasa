@@ -75,6 +75,8 @@ pomasa/
 └── references/                   # Background reading materials
     ├── declarative-multi-agent-architecture-part1-en.md
     └── declarative-multi-agent-architecture-part2-en.md
+└── research/                     # Broader POMASA research (beyond the MAS itself)
+    └── ai-app-forms-survey/      # Taxonomy of post-LLM application forms (roles of AI / human / deterministic software)
 ```
 
 ## How to Use
