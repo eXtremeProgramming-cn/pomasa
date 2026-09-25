@@ -356,6 +356,8 @@ In Standard and Strict modes, the Orchestrator should verify that data collectio
 - **[Configurable Tool Binding](./BHV-06-configurable-tool-binding.md)**: Defines which specific tools to use and in what priority order
 - **[Intelligent Runtime](./COR-02-intelligent-runtime.md)**: Provides default search and fetch tools
 - **[Methodological Guidance](./STR-06-methodological-guidance.md)**: Defines what types of sources are credible (orthogonal to how they are obtained)
+- **[Multi-Angle Collection](./BHV-09-multi-angle-collection.md)**: Structures which sources to seek (angles per question layer); this pattern governs how each source is captured — orthogonal and co-applied
+- **[Ideological Foundation](./STR-10-ideological-foundation.md)**: Adds the standpoint axis to source grading and directs how collected stances are weighed
 - **[Verifiable Data Lineage](./QUA-03-verifiable-data-lineage.md)**: Requires traceable sources; this pattern ensures sources are real and complete
 - **[Embedded Quality Standards](./QUA-01-embedded-quality-standards.md)**: Data collection standards should include preservation requirements
 - **[Progressive Data Refinement](./BHV-04-progressive-data-refinement.md)**: Analysis and refinement happen after collection, not during

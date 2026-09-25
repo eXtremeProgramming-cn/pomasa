@@ -342,6 +342,8 @@ The following types of information sources should be **used cautiously** or **av
 ## Related Patterns
 
 - **[Reference Data Configuration](./STR-01-reference-data-configuration.md)**: Methodological guidance is a subtype of Reference Data
+- **[Ideological Foundation](./STR-10-ideological-foundation.md)**: The evaluative/stance component of methodology — declared framework, source grading, directed interpretation
+- **[Multi-Angle Collection](./BHV-09-multi-angle-collection.md)**: Collection angle tables and acceptance lines belong in the methodology reference data
 - **[Embedded Quality Standards](./QUA-01-embedded-quality-standards.md)**: Quality checklists in methodology are specific implementations of quality standards
 - **[Composable Document Assembly](./STR-05-composable-document-assembly.md)**: Output templates provide format specifications for document assembly
 - **[Verifiable Data Lineage](./QUA-03-verifiable-data-lineage.md)**: Data sources guide supports data lineage tracing

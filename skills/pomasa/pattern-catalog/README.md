@@ -4,6 +4,8 @@
 
 This catalog contains architectural patterns for Declarative Multi-Agent Systems. These patterns are derived from analysis and extraction of real running systems and can be used to guide the construction of new MAS systems.
 
+**Positioning**: POMASA is mined from and primarily serves research- and analysis-producing MAS in the humanities and social sciences (news commentary, journals, columns, investigative and policy research). Patterns such as STR-07, STR-10, and BHV-09 are research-methodology patterns: they assume such a system and encode how these disciplines do their work. Generic MAS construction can adopt the remaining patterns without them.
+
 ## Pattern Language Description
 
 ### Format Conventions
@@ -94,6 +96,7 @@ Patterns are grouped by category, identified by a three-letter prefix:
 | STR-07 | [Reverse-Engineered Research Questions](./STR-07-reverse-engineered-research-questions.md) | Recommended | Generate research questions by reverse-engineering existing documents and identifying gaps from analytical stance |
 | STR-08 | [Pandoc-Ready Markdown Format](./STR-08-pandoc-ready-markdown.md) | Recommended | Markdown format specification ensuring correct conversion to DOCX/PDF |
 | STR-09 | [Deliverable Export Pipeline](./STR-09-deliverable-export-pipeline.md) | Recommended | Export final reports to DOCX/PDF with templates and timestamped filenames |
+| STR-10 | [Ideological Foundation](./STR-10-ideological-foundation.md) | Recommended | Declare the organization's critical framework as reference data; grade sources on tier AND standpoint; listen across the spectrum, weigh through the framework |
 
 ### BHV - Behavior Patterns
 
@@ -107,6 +110,7 @@ Patterns are grouped by category, identified by a three-letter prefix:
 | BHV-06 | [Configurable Tool Binding](./BHV-06-configurable-tool-binding.md) | Optional | Allow users to configure custom search and fetch tools with fallback |
 | BHV-07 | [Cumulative Project Library](./BHV-07-cumulative-project-library.md) | Recommended | Accumulate raw materials in a shared library across multiple runs |
 | BHV-08 | [Wiki Integration](./BHV-08-wiki-integration.md) | Optional | Transform research output into persistent, compounding Obsidian knowledge graph |
+| BHV-09 | [Multi-Angle Collection](./BHV-09-multi-angle-collection.md) | Recommended | Decompose the question into angles (facts/context/reactions/analysis) before collecting; accept per angle; keep gaps visible per angle |
 
 ### QUA - Quality Patterns
 
@@ -196,6 +200,8 @@ Patterns are grouped by category, identified by a three-letter prefix:
 
 OBV-01/02/03 make the STR-02 filesystem data bus observable: OBV-01 declares what each stage produces, OBV-02 declares the run axis and its work units, OBV-03 records each unit's stage-level progress. They let any runtime UI render a MAS uniformly, and make QUA-03 lineage machine-readable. BHV-03 (parallel instance execution) is the batch form of multi-unit OBV-02 runs.
 
+STR-07, STR-10, and BHV-09 extend the methodology line of STR-06 for research systems: STR-07 generates the question list at design time; BHV-09 structures collection per angle at run time; STR-10 declares the framework that grades sources and directs interpretation. STR-07's generated questions feed BHV-09's angle tailoring; STR-10 directs BHV-09's spectrum listening.
+
 ## How to Use This Catalog
 
 ### Building New Systems
@@ -218,6 +224,7 @@ OBV-01/02/03 make the STR-02 filesystem data bus observable: OBV-01 declares wha
 
 ## Version History
 
+- **v0.15** (2026-09): Added BHV-09 Multi-Angle Collection (decompose questions into angles before collecting; per-angle acceptance and visible gaps; mined from three independently built systems that converged on the same four-layer skeleton) and STR-10 Ideological Foundation (declared critical framework as reference data, two-axis source grading, directed spectrum listening; kritik as default instantiation). Catalog positioning statement added: POMASA primarily serves humanities/social-science research MAS.
 - **v0.14** (2026-08): Added OBV observability category with OBV-01 Observable Artifact Contract (artifact contracts + stage indexes), OBV-02 Work Unit Declaration (declared run-axis: single/multi, dimensions, enumeration), OBV-03 Run Manifest (per-unit run.json state machine). All required; generated systems now carry pomasa.json and are uniformly renderable by runtime UIs.
 - **v0.13** (2026-04): Added BHV-08 Wiki Integration for transforming research output into a persistent Obsidian knowledge graph with typed links
 - **v0.12** (2026-04): Added BHV-07 Cumulative Project Library for accumulating raw materials across multiple MAS runs

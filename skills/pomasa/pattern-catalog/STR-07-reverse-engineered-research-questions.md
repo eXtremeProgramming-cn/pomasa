@@ -305,6 +305,8 @@ The analytical stance is **critical** for Phase 2 (gap identification). Without 
 
 - **[Reference Data Configuration](./STR-01-reference-data-configuration.md)**: Seed documents may be stored as reference data
 - **[Methodological Guidance](./STR-06-methodological-guidance.md)**: Multi-stage workflows using this pattern are described in methodology
+- **[Ideological Foundation](./STR-10-ideological-foundation.md)**: The analytical stance that drives gap identification should be declared per that pattern, so the stance itself is auditable
+- **[Multi-Angle Collection](./BHV-09-multi-angle-collection.md)**: The generated question list can be grouped into that pattern's collection angles; design-time question generation and run-time collection structure
 - **[Orchestrated Agent Pipeline](./BHV-01-orchestrated-agent-pipeline.md)**: Question generation is a stage in the pipeline
 - **[Progressive Data Refinement](./BHV-04-progressive-data-refinement.md)**: Questions drive the refinement from overview to deep research
 
